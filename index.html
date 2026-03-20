@@ -148,19 +148,49 @@
       .key-numbers { grid-template-columns: repeat(2, 1fr); }
     }
     /* Logo & Header */
-    .logo-header { display: flex; align-items: center; gap: 16px; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border-tertiary); }
-    .logo-mark { width: 56px; height: 56px; border: 2px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; }
-    .logo-mark::before { content: ''; position: absolute; inset: 3px; border: 1px solid var(--gold-dim); border-radius: 50%; }
-    .logo-inner { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 20px; color: var(--gold); letter-spacing: 0.02em; line-height: 1; }
+    .logo-header { display: flex; align-items: center; gap: 20px; margin-bottom: 1.5rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--color-border-tertiary); }
+    .logo-svg { flex-shrink: 0; }
     .logo-text { display: flex; flex-direction: column; }
-    .logo-name { font-family: 'Playfair Display', serif; font-weight: 800; font-size: 22px; color: var(--gold); letter-spacing: 0.06em; text-transform: uppercase; }
-    .logo-tagline { font-size: 11px; color: var(--color-text-secondary); letter-spacing: 0.15em; text-transform: uppercase; margin-top: 2px; }
+    .logo-name { font-family: 'Playfair Display', serif; font-weight: 800; font-size: 26px; color: var(--gold); letter-spacing: 0.08em; text-transform: uppercase; line-height: 1.1; }
+    .logo-tagline { font-size: 11px; color: var(--color-text-secondary); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 4px; }
+    .logo-divider { width: 1px; height: 48px; background: var(--color-border-secondary); flex-shrink: 0; }
+    .logo-mascot-label { font-size: 9px; color: var(--gold-dim); letter-spacing: 0.12em; text-transform: uppercase; text-align: center; margin-top: 2px; }
   </style>
 </head>
 <body>
 <div class="app">
   <div class="logo-header">
-    <div class="logo-mark"><span class="logo-inner">OT</span></div>
+    <!-- Gorilla mascot + dumbbell logo -->
+    <div class="logo-svg">
+      <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Outer ring -->
+        <circle cx="32" cy="32" r="30" stroke="#c9a96e" stroke-width="1.5"/>
+        <circle cx="32" cy="32" r="27" stroke="#a08440" stroke-width="0.5"/>
+        <!-- Gorilla head - geometric/minimal -->
+        <g transform="translate(32,28)" fill="#c9a96e">
+          <!-- Head shape -->
+          <path d="M0-14C-7-14-12-9-12-3C-12 0-11 3-9 5C-8 7-5 9-3 10L-1 11L0 14L1 11L3 10C5 9 8 7 9 5C11 3 12 0 12-3C12-9 7-14 0-14Z" fill="#c9a96e"/>
+          <!-- Brow ridge -->
+          <path d="M-10-4C-10-4-7-8-0-8C7-8 10-4 10-4C10-5 8-10 0-10C-8-10-10-5-10-4Z" fill="#0a0a0a"/>
+          <!-- Eyes -->
+          <ellipse cx="-4.5" cy="-3" rx="1.8" ry="1.4" fill="#0a0a0a"/>
+          <ellipse cx="4.5" cy="-3" rx="1.8" ry="1.4" fill="#0a0a0a"/>
+          <ellipse cx="-4" cy="-3.2" rx="0.6" ry="0.5" fill="#c9a96e"/>
+          <ellipse cx="5" cy="-3.2" rx="0.6" ry="0.5" fill="#c9a96e"/>
+          <!-- Nose/muzzle -->
+          <path d="M-4 1C-4 1-5 4-4 6C-3 7.5-1.5 8 0 8C1.5 8 3 7.5 4 6C5 4 4 1 4 1C2.5 2 1.5 2.5 0 2.5C-1.5 2.5-2.5 2-4 1Z" fill="#a08440"/>
+          <!-- Nostrils -->
+          <ellipse cx="-1.5" cy="4.5" rx="1" ry="0.7" fill="#0a0a0a"/>
+          <ellipse cx="1.5" cy="4.5" rx="1" ry="0.7" fill="#0a0a0a"/>
+        </g>
+        <!-- Small dumbbell at bottom -->
+        <g transform="translate(32,54)" stroke="#c9a96e" stroke-width="1.2" fill="none">
+          <rect x="-10" y="-2.5" width="4" height="5" rx="1" fill="#a08440"/>
+          <rect x="6" y="-2.5" width="4" height="5" rx="1" fill="#a08440"/>
+          <line x1="-6" y1="0" x2="6" y2="0" stroke-width="1.5"/>
+        </g>
+      </svg>
+    </div>
     <div class="logo-text">
       <div class="logo-name">Old Town Gym</div>
       <div class="logo-tagline">Private Fitness &middot; Ostrava Centrum</div>
