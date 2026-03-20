@@ -287,6 +287,12 @@
         Max. kapacita gymu: <strong>3 dosp&#283;l&#237; sou&#269;asn&#283;</strong>. &#268;len se m&#367;&#382;e p&#345;ipojit do hodiny, kterou m&#225; zarezervovanou jin&#253; &#269;len (nap&#345;. kamar&#225;d), pokud celkov&#253; po&#269;et nep&#345;es&#225;hne 3 osoby. Ka&#382;d&#253; slot = 1h 15 min (1h tr&#233;nink + 15 min &#353;atna/p&#345;evle&#269;en&#237;).
       </div>
     </div>
+    <div style="position:sticky;bottom:0;z-index:100;padding:10px 0">
+      <div style="display:flex;align-items:center;gap:10px;background:var(--color-background-elevated);border:1px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:8px 14px">
+        <button class="cfo-btn cfo-btn-solid" onclick="forceSave()">Ulo&#382;it zm&#283;ny</button>
+        <span id="save-status" style="font-size:11px;color:var(--color-text-secondary)"></span>
+      </div>
+    </div>
 
     <div class="card">
       <div class="card-title">Dal&#353;&#237; p&#345;&#237;jmy</div>
@@ -602,34 +608,49 @@ const BLOB_ID = '019d0b41-737c-7cde-8e4a-55dbe4d04a95';
 const BLOB_URL = 'https://jsonblob.com/api/jsonBlob/' + BLOB_ID;
 let _saveTimeout = null;
 
+function getPayload() {
+  return {
+    tiers: tiers,
+    extras: {
+      rentalH: document.getElementById('rental-h').value,
+      rentalP: document.getElementById('rental-price').value,
+      dropinQ: document.getElementById('dropin').value,
+      dropinP: document.getElementById('dropin-price').value,
+    },
+    cfo: cfoData || {},
+    savedAt: new Date().toISOString(),
+  };
+}
+
 function saveToCloud() {
-  // Debounce: wait 500ms after last change before saving
   clearTimeout(_saveTimeout);
-  _saveTimeout = setTimeout(() => {
-    try {
-      const payload = {
-        tiers: tiers,
-        extras: {
-          rentalH: document.getElementById('rental-h').value,
-          rentalP: document.getElementById('rental-price').value,
-          dropinQ: document.getElementById('dropin').value,
-          dropinP: document.getElementById('dropin-price').value,
-        },
-        cfo: cfoData || {},
-        savedAt: new Date().toISOString(),
-      };
-      // Save to localStorage as cache
-      localStorage.setItem('gym-cloud-cache', JSON.stringify(payload));
-      // Save to cloud
-      fetch(BLOB_URL, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      }).then(() => {
-        console.log('Cloud save OK', new Date().toLocaleTimeString());
-      }).catch(e => { console.warn('Cloud save failed:', e); });
-    } catch(e) { console.warn('saveToCloud error:', e); }
-  }, 500);
+  _saveTimeout = setTimeout(function() { doSave(); }, 800);
+}
+
+function forceSave() {
+  clearTimeout(_saveTimeout);
+  doSave();
+}
+
+function doSave() {
+  var status = document.getElementById('save-status');
+  if (status) status.textContent = 'Ukl\u00e1d\u00e1m...';
+  var payload = getPayload();
+  localStorage.setItem('gym-cloud-cache', JSON.stringify(payload));
+  var xhr = new XMLHttpRequest();
+  xhr.open('PUT', BLOB_URL, true);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.onload = function() {
+    if (xhr.status >= 200 && xhr.status < 300) {
+      if (status) { status.textContent = '\u2713 Ulo\u017eeno ' + new Date().toLocaleTimeString(); status.style.color = '#c9a96e'; }
+    } else {
+      if (status) { status.textContent = 'Chyba: ' + xhr.status; status.style.color = '#c45c5c'; }
+    }
+  };
+  xhr.onerror = function() {
+    if (status) { status.textContent = 'Chyba s\u00edt\u011b'; status.style.color = '#c45c5c'; }
+  };
+  xhr.send(JSON.stringify(payload));
 }
 
 function loadFromCloud() {
