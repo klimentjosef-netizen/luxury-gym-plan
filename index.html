@@ -298,26 +298,20 @@
     </div>
 
     <div class="card">
-      <div class="card-title">Dal&scaron;&iacute; p&rcaron;&iacute;jmy</div>
-      <div class="slider-row">
-        <span class="slider-label">Blokov&eacute; pron&aacute;jmy (hod/m&ecaron;s)</span>
-        <input type="range" id="rental-h" min="0" max="80" value="20" step="1" oninput="updateModel()">
-        <span class="slider-val" id="rental-out">20 hod</span>
-      </div>
-      <div class="slider-row">
-        <span class="slider-label">Cena bloku (K&ccaron;/hod)</span>
-        <input type="range" id="rental-price" min="0" max="5000" value="800" step="50" oninput="updateModel()">
-        <span class="slider-val" id="rprice-out">800 K&ccaron;</span>
-      </div>
-      <div class="slider-row">
-        <span class="slider-label">Drop-in vstupy (ks/m&ecaron;s)</span>
-        <input type="range" id="dropin" min="0" max="50" value="10" step="1" oninput="updateModel()">
-        <span class="slider-val" id="dropin-out">10 vstup&ucirc;</span>
-      </div>
-      <div class="slider-row">
-        <span class="slider-label">Cena drop-in (K&ccaron;)</span>
-        <input type="range" id="dropin-price" min="0" max="2000" value="350" step="50" oninput="updateModel()">
-        <span class="slider-val" id="dprice-out">350 K&ccaron;</span>
+      <div class="card-title">Dal&#353;&#237; p&#345;&#237;jmy</div>
+      <div class="two-col">
+        <div>
+          <div style="font-size:12px;color:var(--gold-dim);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:8px">Blokov&#233; pron&#225;jmy</div>
+          <div class="cfo-row"><span>Hodin / m&#283;s&#237;c</span><input class="cfo-input" type="number" id="rental-h" min="0" step="1" value="20" oninput="updateModel()"></div>
+          <div class="cfo-row"><span>Cena za hodinu (K&#269;)</span><input class="cfo-input" type="number" id="rental-price" min="0" step="50" value="800" oninput="updateModel()"></div>
+          <div style="font-size:12px;color:var(--gold-dim);margin-top:6px;text-align:right">P&#345;&#237;jem: <strong style="color:var(--gold)" id="rental-total">16 000 K&#269;/m&#283;s</strong></div>
+        </div>
+        <div>
+          <div style="font-size:12px;color:var(--gold-dim);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:8px">Drop-in vstupy</div>
+          <div class="cfo-row"><span>Vstup&#367; / m&#283;s&#237;c</span><input class="cfo-input" type="number" id="dropin" min="0" step="1" value="10" oninput="updateModel()"></div>
+          <div class="cfo-row"><span>Cena za vstup (K&#269;)</span><input class="cfo-input" type="number" id="dropin-price" min="0" step="50" value="350" oninput="updateModel()"></div>
+          <div style="font-size:12px;color:var(--gold-dim);margin-top:6px;text-align:right">P&#345;&#237;jem: <strong style="color:var(--gold)" id="dropin-total">3 500 K&#269;/m&#283;s</strong></div>
+        </div>
       </div>
     </div>
 
@@ -541,17 +535,15 @@ function renderTiers() {
         <input class="tier-builder-name" value="${t.name}" oninput="tiers[${i}].name=this.value;updateModel()">
         ${tiers.length > 1 ? `<button class="tier-remove" onclick="removeTier(${i})">×</button>` : ''}
       </div>
-      <div class="slider-row">
-        <span class="slider-label">Cena (Kč/měs)</span>
-        <input type="range" min="0" max="20000" step="100" value="${t.price}" oninput="tiers[${i}].price=+this.value;updateModel()">
-        <span class="slider-val">${fmtN(t.price)} Kč</span>
+      <div class="cfo-row">
+        <span>Cena (Kč/měs)</span>
+        <input class="cfo-input" type="number" min="0" max="99999" step="100" value="${t.price}" oninput="tiers[${i}].price=+this.value;updateModel()">
       </div>
-      <div class="slider-row">
-        <span class="slider-label">Počet členů</span>
-        <input type="range" min="0" max="50" step="1" value="${t.members}" oninput="tiers[${i}].members=+this.value;updateModel()">
-        <span class="slider-val">${t.members}</span>
+      <div class="cfo-row">
+        <span>Počet členů</span>
+        <input class="cfo-input" type="number" min="0" max="200" step="1" value="${t.members}" oninput="tiers[${i}].members=+this.value;updateModel()">
       </div>
-      <div style="font-size:12px;color:var(--gold-dim);margin-top:4px">Příjem z tohoto tieru: <strong style="color:var(--gold)">${fmt(t.price * t.members)}/měs</strong></div>
+      <div style="font-size:12px;color:var(--gold-dim);margin-top:6px;text-align:right">Příjem: <strong style="color:var(--gold)">${fmt(t.price * t.members)}/měs</strong></div>
     </div>
   `).join('');
 }
@@ -601,10 +593,10 @@ function calcOpex(totalRev) {
 // === MODEL UPDATE ===
 function updateModel() {
   const p = getParams();
-  document.getElementById('rental-out').textContent = p.rentalH + ' hod';
-  document.getElementById('rprice-out').textContent = fmtN(p.rentalP) + ' Kč';
-  document.getElementById('dropin-out').textContent = p.dropinQ + ' vstupů';
-  document.getElementById('dprice-out').textContent = fmtN(p.dropinP) + ' Kč';
+  const rt = document.getElementById('rental-total');
+  const dt = document.getElementById('dropin-total');
+  if (rt) rt.textContent = fmt(p.rentalH * p.rentalP) + '/měs';
+  if (dt) dt.textContent = fmt(p.dropinQ * p.dropinP) + '/měs';
 
   const rev = calcRevenue(p);
   const opex = calcOpex(rev.total);
