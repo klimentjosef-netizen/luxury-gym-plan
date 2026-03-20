@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luxury Gym — Business Plan</title>
+  <style>
+    :root {
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --color-text-primary: #1a1a1a;
+      --color-text-secondary: #6b7280;
+      --color-background-primary: #ffffff;
+      --color-background-secondary: #f5f5f5;
+      --color-border-tertiary: #e5e7eb;
+      --color-border-secondary: #d1d5db;
+      --border-radius-md: 8px;
+      --border-radius-lg: 12px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-text-primary: #f0f0f0;
+        --color-text-secondary: #9ca3af;
+        --color-background-primary: #1a1a1a;
+        --color-background-secondary: #262626;
+        --color-border-tertiary: #374151;
+        --color-border-secondary: #4b5563;
+      }
+      body { background: #111; }
+      .badge-rec { background: #064e3b; color: #6ee7b7; }
+      .badge-premium { background: #2e1065; color: #c4b5fd; }
+      .warn-box { background: #451a03; color: #fde68a; border-left-color: #d97706; }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-sans); color: var(--color-text-primary); background: var(--color-background-primary); }
+    .app { max-width: 960px; margin: 0 auto; padding: 1.5rem 1rem; }
+    .tabs { display: flex; gap: 4px; margin-bottom: 1.5rem; border-bottom: 0.5px solid var(--color-border-tertiary); overflow-x: auto; }
+    .tab { padding: 8px 16px; font-size: 13px; cursor: pointer; border: none; background: none; color: var(--color-text-secondary); border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: nowrap; }
+    .tab.active { color: var(--color-text-primary); font-weight: 500; border-bottom-color: var(--color-text-primary); }
+    .section { display: none; }
+    .section.active { display: block; }
+    .metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 1.5rem; }
+    .metric { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 1rem; }
+    .metric-label { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 6px; }
+    .metric-value { font-size: 22px; font-weight: 500; color: var(--color-text-primary); }
+    .metric-sub { font-size: 11px; color: var(--color-text-secondary); margin-top: 3px; }
+    .card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.25rem; margin-bottom: 1rem; }
+    .card-title { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 1rem; }
+    .slider-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .slider-label { font-size: 13px; color: var(--color-text-secondary); min-width: 200px; }
+    .slider-val { font-size: 13px; font-weight: 500; min-width: 90px; text-align: right; }
+    input[type=range] { flex: 1; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .tier-card { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem; }
+    .tier-name { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+    .tier-price { font-size: 24px; font-weight: 500; margin: 8px 0; }
+    .tier-price span { font-size: 13px; font-weight: 400; color: var(--color-text-secondary); }
+    .tier-feature { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 3px; }
+    .badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: var(--border-radius-md); margin-bottom: 8px; }
+    .badge-rec { background: #E1F5EE; color: #0F6E56; }
+    .badge-premium { background: #EEEDFE; color: #3C3489; }
+    .tbl { width: 100%; font-size: 12px; border-collapse: collapse; }
+    .tbl th { text-align: left; color: var(--color-text-secondary); font-weight: 500; padding: 6px 8px; border-bottom: 0.5px solid var(--color-border-tertiary); font-size: 11px; }
+    .tbl td { padding: 6px 8px; border-bottom: 0.5px solid var(--color-border-tertiary); color: var(--color-text-primary); }
+    .tbl tr:last-child td { border-bottom: none; }
+    .tbl .pos { color: #0F6E56; font-weight: 500; }
+    .tbl .neg { color: #A32D2D; }
+    .tbl .bold { font-weight: 500; }
+    .tbl .sum-row td { background: var(--color-background-secondary); font-weight: 500; }
+    .progress-bar { height: 6px; background: var(--color-background-secondary); border-radius: 3px; margin-top: 4px; }
+    .progress-fill { height: 100%; border-radius: 3px; background: #1D9E75; }
+    .warn-fill { background: #EF9F27; }
+    .danger-fill { background: #E24B4A; }
+    .info-box { background: var(--color-background-secondary); border-left: 3px solid #378ADD; border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0; padding: 10px 14px; margin-bottom: 1rem; font-size: 13px; color: var(--color-text-secondary); }
+    .info-box strong { color: var(--color-text-primary); font-weight: 500; }
+    .warn-box { background: #FAEEDA; border-left: 3px solid #EF9F27; border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0; padding: 10px 14px; margin-bottom: 1rem; font-size: 13px; color: #633806; }
+    .question-row { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 0.5px solid var(--color-border-tertiary); }
+    .q-num { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); min-width: 20px; }
+    .q-text { font-size: 13px; color: var(--color-text-primary); flex: 1; }
+    .q-why { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
+    .struct-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 0.5px solid var(--color-border-tertiary); font-size: 13px; }
+    .struct-key { color: var(--color-text-secondary); }
+    .struct-val { font-weight: 500; color: var(--color-text-primary); }
+    .struct-val.green { color: #0F6E56; }
+    .struct-val.amber { color: #854F0B; }
+    .chart-wrap { position: relative; width: 100%; }
+    @media (max-width: 768px) {
+      .metrics { grid-template-columns: repeat(2, 1fr); }
+      .two-col { grid-template-columns: 1fr; }
+      .tier-grid { grid-template-columns: 1fr !important; }
+      .slider-row { flex-wrap: wrap; }
+      .slider-label { min-width: 100%; }
+    }
+    @media (max-width: 480px) {
+      .metrics { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('cashflow')">Cashflow model</button>
+    <button class="tab" onclick="switchTab('pricing')">Cenotvorba</button>
+    <button class="tab" onclick="switchTab('structure')">Právní struktura</button>
+    <button class="tab" onclick="switchTab('questions')">Otevřené dotazy</button>
+  </div>
+
+  <!-- CASHFLOW TAB -->
+  <div class="section active" id="tab-cashflow">
+    <div class="card">
+      <div class="card-title">Parametry modelu</div>
+      <div class="slider-row">
+        <span class="slider-label">Počet členů (měsíčně)</span>
+        <input type="range" id="members" min="10" max="80" value="35" step="1" oninput="update()">
+        <span class="slider-val" id="members-out">35</span>
+      </div>
+      <div class="slider-row">
+        <span class="slider-label">Průměrné členství (CZK/měs)</span>
+        <input type="range" id="avg-mem" min="2000" max="6000" value="3500" step="100" oninput="update()">
+        <span class="slider-val" id="avg-mem-out">3 500 Kč</span>
+      </div>
+      <div class="slider-row">
+        <span class="slider-label">Blokové pronájmy (hod/měs)</span>
+        <input type="range" id="rental-h" min="0" max="80" value="20" step="1" oninput="update()">
+        <span class="slider-val" id="rental-out">20 hod</span>
+      </div>
+      <div class="slider-row">
+        <span class="slider-label">Cena bloku (CZK/hod)</span>
+        <input type="range" id="rental-price" min="500" max="1500" value="800" step="50" oninput="update()">
+        <span class="slider-val" id="rprice-out">800 Kč</span>
+      </div>
+      <div class="slider-row">
+        <span class="slider-label">Drop-in vstupy (ks/měs)</span>
+        <input type="range" id="dropin" min="0" max="50" value="10" step="1" oninput="update()">
+        <span class="slider-val" id="dropin-out">10 vstupů</span>
+      </div>
+      <div class="slider-row">
+        <span class="slider-label">Cena drop-in vstup</span>
+        <input type="range" id="dropin-price" min="200" max="600" value="350" step="50" oninput="update()">
+        <span class="slider-val" id="dprice-out">350 Kč</span>
+      </div>
+    </div>
+
+    <div class="metrics" id="metric-cards"></div>
+
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">Měsíční P&amp;L (provozní fáze)</div>
+        <table class="tbl" id="pnl-table"></table>
+      </div>
+      <div class="card">
+        <div class="card-title">Break-even analýza</div>
+        <div id="breakeven-content"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Cashflow — 24 měsíců (ramp-up křivka)</div>
+      <div class="chart-wrap" style="height: 260px;">
+        <canvas id="cfChart"></canvas>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">CAPEX a návratnost investice</div>
+      <table class="tbl" id="capex-table"></table>
+    </div>
+  </div>
+
+  <!-- PRICING TAB -->
+  <div class="section" id="tab-pricing">
+    <div class="info-box"><strong>Ostrava centrum — luxury segment.</strong> Benchmark: Holmes Place Praha 3 500–5 000 Kč/měs, malá soukromá fitka 2 500–4 000 Kč. Doporučená strategie: 3 tiery + blokový pronájem jako B2B stream.</div>
+
+    <div class="tier-grid" style="display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; margin-bottom: 1rem;">
+      <div class="tier-card">
+        <div class="tier-name">Standard</div>
+        <div class="tier-price">2 500 Kč <span>/měs</span></div>
+        <div class="tier-feature">Neomezený vstup (6:00–22:00)</div>
+        <div class="tier-feature">Přístup ke všemu vybavení</div>
+        <div class="tier-feature">Bez rezervace</div>
+        <div class="tier-feature" style="margin-top: 6px; color: var(--color-text-primary);">Cíl: 60 % členů</div>
+      </div>
+      <div class="tier-card" style="border-color: #9FE1CB;">
+        <span class="badge badge-rec">Doporučeno</span>
+        <div class="tier-name">Premium</div>
+        <div class="tier-price">3 900 Kč <span>/měs</span></div>
+        <div class="tier-feature">24/7 vstup (smart lock)</div>
+        <div class="tier-feature">2× měsíčně PT konzultace</div>
+        <div class="tier-feature">Rezervace slotu</div>
+        <div class="tier-feature" style="margin-top: 6px; color: var(--color-text-primary);">Cíl: 30 % členů</div>
+      </div>
+      <div class="tier-card" style="border-color: #AFA9EC;">
+        <span class="badge badge-premium">Exclusive</span>
+        <div class="tier-name">VIP</div>
+        <div class="tier-price">6 500 Kč <span>/měs</span></div>
+        <div class="tier-feature">Neomezený 24/7 + host</div>
+        <div class="tier-feature">4× PT / měsíc</div>
+        <div class="tier-feature">Exkluzivní slot (jen pro tebe)</div>
+        <div class="tier-feature" style="margin-top: 6px; color: var(--color-text-primary);">Cíl: 10 % členů</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">Blokový pronájem (B2B)</div>
+        <table class="tbl">
+          <tr><th>Typ</th><th>Cena</th><th>Pozn.</th></tr>
+          <tr><td>Ranní blok (6–8h)</td><td>700 Kč/hod</td><td>PT trenéři</td></tr>
+          <tr><td>Denní blok (8–16h)</td><td>800 Kč/hod</td><td>skupiny, firmy</td></tr>
+          <tr><td>Večerní blok (18–21h)</td><td>950 Kč/hod</td><td>high demand</td></tr>
+          <tr><td>Celý den (6h+)</td><td>650 Kč/hod</td><td>sleva za objem</td></tr>
+          <tr class="sum-row"><td>Drop-in vstup</td><td>350 Kč/vstup</td><td>bez závazku</td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <div class="card-title">Revenue mix (cílový stav, 35 členů)</div>
+        <div class="chart-wrap" style="height: 200px;">
+          <canvas id="mixChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Cenotvorba vs. konkurence</div>
+      <table class="tbl">
+        <tr><th>Subjekt</th><th>Typ</th><th>Cena/měs</th><th>Pozn.</th></tr>
+        <tr><td>Holmes Place Praha</td><td>Premium řetězec</td><td>3 500–5 000</td><td>benchmark horní</td></tr>
+        <tr><td>Soukromé studio Praha</td><td>Private gym</td><td>2 500–4 000</td><td>váš segment</td></tr>
+        <tr><td>Sportisimo Fitness Ostrava</td><td>Mass market</td><td>599–999</td><td>jiný segment</td></tr>
+        <tr><td>Fittings / menší Ostrava</td><td>Mid-market</td><td>900–1 600</td><td>odlišit se designem</td></tr>
+        <tr class="sum-row"><td><strong>Váš Standard tier</strong></td><td>Luxury private</td><td><strong>2 500</strong></td><td>vstupní, opodstatněný</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- STRUCTURE TAB -->
+  <div class="section" id="tab-structure">
+    <div class="info-box"><strong>Doporučení: s.r.o. jako provozovatel + dobrovolná registrace k DPH od startu.</strong> Níže rozklíčováno proč a jak.</div>
+
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">Doporučená struktura</div>
+        <div class="struct-row"><span class="struct-key">Právní forma</span><span class="struct-val green">s.r.o.</span></div>
+        <div class="struct-row"><span class="struct-key">Základní kapitál</span><span class="struct-val">1 Kč (min.)</span></div>
+        <div class="struct-row"><span class="struct-key">Nájemní smlouva</span><span class="struct-val">s.r.o. = nájemce</span></div>
+        <div class="struct-row"><span class="struct-key">DPH registrace</span><span class="struct-val green">Dobrovolná od startu</span></div>
+        <div class="struct-row"><span class="struct-key">Sazba DPH (členství)</span><span class="struct-val">12 % (snížená)</span></div>
+        <div class="struct-row"><span class="struct-key">Sazba DPH (pronájem haly)</span><span class="struct-val amber">0 % nebo 21 % *</span></div>
+        <div class="struct-row"><span class="struct-key">Daň z příjmu PO</span><span class="struct-val">21 %</span></div>
+        <div class="struct-row"><span class="struct-key">Živnost</span><span class="struct-val">Volná — provoz sport. zař.</span></div>
+        <div class="struct-row"><span class="struct-key">Odměna jednatele</span><span class="struct-val">Smlouva o výkonu funkce</span></div>
+        <div class="struct-row"><span class="struct-key">Dividendy</span><span class="struct-val">15 % srážková daň</span></div>
+      </div>
+      <div class="card">
+        <div class="card-title">DPH — klíčové rozhodnutí</div>
+        <div class="warn-box">* Pronájem nemovitosti je standardně od DPH osvobozen (§ 56 ZDPH). Pokud ale pronajímáte prostor plátcům DPH jako "sportovní zařízení k určitému účelu", je to 12 %. Formulace smlouvy = klíčová. Poradit se s daňovým poradcem.</div>
+        <table class="tbl">
+          <tr><th>Aktivita</th><th>Sazba DPH</th></tr>
+          <tr><td>Členské příspěvky</td><td>12 %</td></tr>
+          <tr><td>Personal training</td><td>12 %</td></tr>
+          <tr><td>Drop-in vstup</td><td>12 %</td></tr>
+          <tr><td>Blokový pronájem trenérům</td><td>0 % nebo 12 % *</td></tr>
+          <tr><td>Rekonstrukce (vstup)</td><td>odpočet 21 %</td></tr>
+          <tr class="sum-row"><td>Vybavení (vstup)</td><td>odpočet 21 %</td></tr>
+        </table>
+        <div style="margin-top: 10px; font-size: 12px; color: var(--color-text-secondary);">Odpočet DPH z CAPEX 1,5M Kč → úspora cca 265 000 Kč (při 21 % na vybavení a rekonstrukci).</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Srovnání: s.r.o. vs. OSVČ</div>
+      <table class="tbl">
+        <tr><th>Kritérium</th><th>s.r.o.</th><th>OSVČ (paušál)</th><th>Vítěz</th></tr>
+        <tr><td>Daň z příjmu</td><td>21 % z zisku</td><td>flat ~100K/rok do 1,5M</td><td class="pos">OSVČ (do 1,5M)</td></tr>
+        <tr><td>Nad 2M příjmů</td><td>21 % ze zisku</td><td>paušál nefunguje</td><td class="pos">s.r.o.</td></tr>
+        <tr><td>Odpovědnost</td><td>omezená</td><td>celým majetkem</td><td class="pos">s.r.o.</td></tr>
+        <tr><td>DPH odpočet</td><td>plně</td><td>plně</td><td>shodně</td></tr>
+        <tr><td>Reinvestice zisku</td><td>bez daně</td><td>vše zdaněno ihned</td><td class="pos">s.r.o.</td></tr>
+        <tr><td>Administrativa</td><td>podvojné účetnictví</td><td>daňová evidence</td><td class="pos">OSVČ</td></tr>
+        <tr class="sum-row"><td><strong>Doporučení</strong></td><td><strong>s.r.o.</strong></td><td>riziko nad 2M</td><td class="pos">s.r.o.</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Postup založení (krok za krokem)</div>
+      <table class="tbl">
+        <tr><th>#</th><th>Krok</th><th>Kde</th><th>Náklad</th></tr>
+        <tr><td>1</td><td>Sepsání zakladatelské listiny (notář)</td><td>Notář</td><td>~5 000 Kč</td></tr>
+        <tr><td>2</td><td>Ohlášení živnosti (volná)</td><td>Živnostenský úřad</td><td>1 000 Kč</td></tr>
+        <tr><td>3</td><td>Zápis do obchodního rejstříku</td><td>OR / datová schránka</td><td>6 000 Kč</td></tr>
+        <tr><td>4</td><td>Otevření bankovního účtu</td><td>Banka</td><td>0 Kč</td></tr>
+        <tr><td>5</td><td>Přihláška k DPH (dobrovolná)</td><td>Finanční úřad</td><td>0 Kč</td></tr>
+        <tr><td>6</td><td>Podpis nájemní smlouvy (na s.r.o.)</td><td>S pronajímatelem</td><td>—</td></tr>
+        <tr class="sum-row"><td></td><td><strong>Celkem admin. náklady</strong></td><td></td><td><strong>~12 000 Kč</strong></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- QUESTIONS TAB -->
+  <div class="section" id="tab-questions">
+    <div class="info-box"><strong>Tyto body musí být ověřeny před podpisem nájemní smlouvy a zahájením rekonstrukce.</strong> Doporučuji je zahrnout jako podmínky v nájemní smlouvě nebo jako due diligence checklist.</div>
+    <div id="questions-list"></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const NAJEM = 28000;
+const CAPEX = 1500000;
+const OPEX_FIXED = {
+  najem: 28000,
+  energie: 8000,
+  internet_alarm: 2500,
+  ucetnictvi: 3000,
+  pojisteni: 2000,
+  marketing: 5000,
+  smart_system: 1500,
+};
+const OPEX_VAR_PCT = 0.05;
+
+let cfChart = null, mixChart = null;
+
+function fmt(n) { return Math.round(n).toLocaleString('cs-CZ') + ' Kč'; }
+function fmtN(n) { return Math.round(n).toLocaleString('cs-CZ'); }
+
+function getParams() {
+  return {
+    members: +document.getElementById('members').value,
+    avgMem: +document.getElementById('avg-mem').value,
+    rentalH: +document.getElementById('rental-h').value,
+    rentalP: +document.getElementById('rental-price').value,
+    dropinQ: +document.getElementById('dropin').value,
+    dropinP: +document.getElementById('dropin-price').value,
+  };
+}
+
+function calcRevenue(p) {
+  const memRev = p.members * p.avgMem;
+  const rentalRev = p.rentalH * p.rentalP;
+  const dropinRev = p.dropinQ * p.dropinP;
+  return { memRev, rentalRev, dropinRev, total: memRev + rentalRev + dropinRev };
+}
+
+function calcOpex(totalRev) {
+  const fixed = Object.values(OPEX_FIXED).reduce((a,b) => a+b, 0);
+  const variable = totalRev * OPEX_VAR_PCT;
+  return { fixed, variable, total: fixed + variable };
+}
+
+function update() {
+  const p = getParams();
+  document.getElementById('members-out').textContent = p.members;
+  document.getElementById('avg-mem-out').textContent = p.avgMem.toLocaleString('cs-CZ') + ' Kč';
+  document.getElementById('rental-out').textContent = p.rentalH + ' hod';
+  document.getElementById('rprice-out').textContent = p.rentalP.toLocaleString('cs-CZ') + ' Kč';
+  document.getElementById('dropin-out').textContent = p.dropinQ + ' vstupů';
+  document.getElementById('dprice-out').textContent = p.dropinP.toLocaleString('cs-CZ') + ' Kč';
+
+  const rev = calcRevenue(p);
+  const opex = calcOpex(rev.total);
+  const ebitda = rev.total - opex.total;
+  const fixedOpex = Object.values(OPEX_FIXED).reduce((a,b)=>a+b,0);
+  const beMembers = Math.ceil(fixedOpex / (p.avgMem * (1 - OPEX_VAR_PCT)));
+
+  const utilPct = Math.min(100, Math.round(p.members / 60 * 100));
+  const roiMonths = ebitda > 0 ? Math.round(CAPEX / ebitda) : 999;
+  document.getElementById('metric-cards').innerHTML = `
+    <div class="metric"><div class="metric-label">Měsíční příjem</div><div class="metric-value">${fmt(rev.total)}</div><div class="metric-sub">hrubý obrat</div></div>
+    <div class="metric"><div class="metric-label">EBITDA / měsíc</div><div class="metric-value" style="color:${ebitda>0?'#0F6E56':'#A32D2D'}">${fmt(ebitda)}</div><div class="metric-sub">${ebitda>0?'zisk':'ztráta'}</div></div>
+    <div class="metric"><div class="metric-label">Break-even členů</div><div class="metric-value">${beMembers}</div><div class="metric-sub">min. pro pokrytí nákladů</div></div>
+    <div class="metric"><div class="metric-label">Návratnost CAPEX</div><div class="metric-value">${ebitda>0?roiMonths+' měs':'—'}</div><div class="metric-sub">${ebitda>0?(roiMonths>36?'> 3 roky':'< 3 roky'):'nejdříve dosáhni zisku'}</div></div>
+  `;
+
+  document.getElementById('pnl-table').innerHTML = `
+    <tr><th>Položka</th><th style="text-align:right">CZK/měs</th></tr>
+    <tr><td>Členské příspěvky (${p.members} × ${fmtN(p.avgMem)} Kč)</td><td style="text-align:right" class="pos">${fmt(rev.memRev)}</td></tr>
+    <tr><td>Blokové pronájmy (${p.rentalH} hod × ${fmtN(p.rentalP)} Kč)</td><td style="text-align:right" class="pos">${fmt(rev.rentalRev)}</td></tr>
+    <tr><td>Drop-in vstupy (${p.dropinQ} × ${fmtN(p.dropinP)} Kč)</td><td style="text-align:right" class="pos">${fmt(rev.dropinRev)}</td></tr>
+    <tr class="sum-row"><td><strong>Celkový příjem</strong></td><td style="text-align:right"><strong>${fmt(rev.total)}</strong></td></tr>
+    <tr><td style="padding-top:8px">Nájem</td><td style="text-align:right" class="neg">−${fmt(OPEX_FIXED.najem)}</td></tr>
+    <tr><td>Energie + voda</td><td style="text-align:right" class="neg">−${fmt(OPEX_FIXED.energie)}</td></tr>
+    <tr><td>Internet + alarm + tech</td><td style="text-align:right" class="neg">−${fmt(OPEX_FIXED.internet_alarm + OPEX_FIXED.smart_system)}</td></tr>
+    <tr><td>Účetnictví</td><td style="text-align:right" class="neg">−${fmt(OPEX_FIXED.ucetnictvi)}</td></tr>
+    <tr><td>Pojištění</td><td style="text-align:right" class="neg">−${fmt(OPEX_FIXED.pojisteni)}</td></tr>
+    <tr><td>Marketing</td><td style="text-align:right" class="neg">−${fmt(OPEX_FIXED.marketing)}</td></tr>
+    <tr><td>Variabilní náklady (5 % z obratu)</td><td style="text-align:right" class="neg">−${fmt(opex.variable)}</td></tr>
+    <tr class="sum-row"><td><strong>Celkové náklady</strong></td><td style="text-align:right"><strong class="neg">−${fmt(opex.total)}</strong></td></tr>
+    <tr class="sum-row"><td><strong>EBITDA</strong></td><td style="text-align:right"><strong style="color:${ebitda>=0?'#0F6E56':'#A32D2D'}">${ebitda>=0?'+':''}${fmt(ebitda)}</strong></td></tr>
+  `;
+
+  const bePct = Math.min(100, Math.round(p.members / beMembers * 100));
+  const fillClass = bePct >= 100 ? 'progress-fill' : bePct >= 70 ? 'progress-fill warn-fill' : 'progress-fill danger-fill';
+  document.getElementById('breakeven-content').innerHTML = `
+    <div style="margin-bottom: 12px;">
+      <div style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 4px;">Aktuální obsazenost vůči break-even</div>
+      <div style="font-size: 28px; font-weight: 500; color: var(--color-text-primary); margin: 8px 0;">${p.members} / ${beMembers} členů</div>
+      <div class="progress-bar"><div class="${fillClass}" style="width: ${bePct}%"></div></div>
+      <div style="font-size: 11px; color: var(--color-text-secondary); margin-top: 4px;">${bePct} % break-even bodu</div>
+    </div>
+    <table class="tbl">
+      <tr><th>Scénář</th><th>Členů</th><th>EBITDA/měs</th></tr>
+      ${[15,25,35,45,55].map(m => {
+        const r2 = calcRevenue({...p, members: m});
+        const o2 = calcOpex(r2.total);
+        const e2 = r2.total - o2.total;
+        return `<tr${m===p.members?' style="background:var(--color-background-secondary)"':''}><td>${m===p.members?'► ':''} ${m} členů</td><td>${m}</td><td style="color:${e2>=0?'#0F6E56':'#A32D2D'}">${e2>=0?'+':''}${fmt(e2)}</td></tr>`;
+      }).join('')}
+    </table>
+  `;
+
+  const months = Array.from({length: 24}, (_,i) => 'M'+(i+1));
+  const rampCurve = [0.1,0.2,0.3,0.42,0.52,0.62,0.70,0.76,0.82,0.87,0.90,0.93,0.95,0.96,0.97,0.98,0.99,1,1,1,1,1,1,1];
+  const cumulativeCF = [];
+  let cumul = -CAPEX;
+  const monthlyCFs = months.map((_, i) => {
+    const ramp = rampCurve[i];
+    const mRev = calcRevenue({...p, members: Math.round(p.members * ramp), rentalH: Math.round(p.rentalH * ramp), dropinQ: Math.round(p.dropinQ * ramp)});
+    const mOpex = calcOpex(mRev.total);
+    const mEbitda = mRev.total - mOpex.total;
+    cumul += mEbitda;
+    cumulativeCF.push(Math.round(cumul));
+    return Math.round(mEbitda);
+  });
+
+  if (cfChart) cfChart.destroy();
+  cfChart = new Chart(document.getElementById('cfChart'), {
+    type: 'bar',
+    data: {
+      labels: months,
+      datasets: [
+        { type: 'bar', label: 'Měsíční EBITDA', data: monthlyCFs, backgroundColor: monthlyCFs.map(v => v >= 0 ? '#1D9E75' : '#E24B4A'), yAxisID: 'y' },
+        { type: 'line', label: 'Kumulativní CF (bez CAPEX)', data: cumulativeCF, borderColor: '#378ADD', backgroundColor: 'transparent', pointRadius: 2, yAxisID: 'y2', tension: 0.3 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { font: { size: 11 }, autoSkip: false, maxRotation: 0 } },
+        y: { position: 'left', ticks: { font: { size: 10 }, callback: v => (v/1000)+'k' }, grid: { color: 'rgba(128,128,128,0.1)' } },
+        y2: { position: 'right', ticks: { font: { size: 10 }, callback: v => (v/1000)+'k' }, grid: { display: false } }
+      }
+    }
+  });
+
+  const depreciation = CAPEX / 60;
+  document.getElementById('capex-table').innerHTML = `
+    <tr><th>Položka CAPEX</th><th style="text-align:right">Odhad CZK</th></tr>
+    <tr><td>Stavební úpravy (podlahy, elektro, vzduchotechnika)</td><td style="text-align:right">500 000–900 000</td></tr>
+    <tr><td>Sprchy + šatny (hygienický standard)</td><td style="text-align:right">200 000–300 000</td></tr>
+    <tr><td>Vybavení (stroje, závaží, cardio — premium)</td><td style="text-align:right">400 000–700 000</td></tr>
+    <tr><td>Smart-entry systém (24/7)</td><td style="text-align:right">80 000–150 000</td></tr>
+    <tr><td>Design + interiér + branding</td><td style="text-align:right">100 000–250 000</td></tr>
+    <tr class="sum-row"><td><strong>Budget celkem</strong></td><td style="text-align:right"><strong>1 500 000 Kč</strong></td></tr>
+    <tr><td style="color:var(--color-text-secondary);font-size:12px">Odpočet DPH z rekonstrukce/vybavení (est.)</td><td style="text-align:right;color:#0F6E56;font-size:12px">+200 000–265 000 Kč</td></tr>
+    <tr><td style="color:var(--color-text-secondary);font-size:12px">Měsíční odpis (60 měsíců / 5 let)</td><td style="text-align:right;font-size:12px">${fmt(depreciation)}/měs</td></tr>
+  `;
+}
+
+function buildMixChart() {
+  if (mixChart) mixChart.destroy();
+  mixChart = new Chart(document.getElementById('mixChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Členství', 'Blok. pronájem', 'Drop-in'],
+      datasets: [{ data: [87500, 16000, 3500], backgroundColor: ['#1D9E75','#378ADD','#EF9F27'], borderWidth: 0 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 12 }, padding: 12 } } }
+    }
+  });
+}
+
+function buildQuestions() {
+  const qs = [
+    { q: "Je 24/7 provoz povolen stávajícím kolaudačním rozhodnutím?", why: "Noční provoz může vyžadovat změnu účelu užívání stavby. Ověřit u stavebního úřadu Ostrava." },
+    { q: "Jaká hluková norma platí pro danou lokalitu (centrum Ostravy)?", why: "Klimatizace, kompresory, hudba — hluk v nočních hodinách může být problém u 24/7 provozu." },
+    { q: "Povoluje nájemní smlouva provoz fitness / sportovního zařízení?", why: "Pronajímatel musí explicitně souhlasit s tímto typem provozu. Zapracovat do smlouvy." },
+    { q: "Jaké jsou hygienické požadavky na šatny a sprchy (vyhláška 238/2011 Sb.)?", why: "Počet sprch, šatních míst a odvětrání jsou normativně dány. Klíčové pro projekt rekonstrukce." },
+    { q: "Podmínky pojišťovny pro 24/7 provoz bez obsluhy?", why: "Většina pojišťoven vyžaduje kamerový systém, smart-lock s logem vstupu, a záložní napájení." },
+    { q: "Živnostenský list: volná živnost stačí, nebo je nutná vázaná (kvalifikace trenéra)?", why: "Pokud klient sám trénuje zákazníky, nutná kvalifikace. Samotný provoz prostoru = volná živnost." },
+    { q: "Je pronajímatel plátce DPH? Je v nájemní smlouvě DPH?", why: "Pokud pronajímatel není plátce nebo neuplatňuje DPH na nájem, nelze si odečíst DPH z nájmu." },
+    { q: "Jaká je minimální výpovědní lhůta a podmínky prodloužení nájmu?", why: "S investicí 1,5M Kč do pronajaté nemovitosti je klíčové zajistit jistotu nájmu min. 5 let." },
+  ];
+  document.getElementById('questions-list').innerHTML = qs.map((item, i) => `
+    <div class="question-row">
+      <span class="q-num">${i+1}.</span>
+      <div style="flex:1">
+        <div class="q-text">${item.q}</div>
+        <div class="q-why">${item.why}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', ['cashflow','pricing','structure','questions'][i] === name));
+  document.querySelectorAll('.section').forEach(s => s.classList.toggle('active', s.id === 'tab-'+name));
+  if (name === 'pricing') setTimeout(buildMixChart, 50);
+}
+
+update();
+buildQuestions();
+</script>
+</body>
+</html>
