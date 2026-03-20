@@ -303,14 +303,14 @@
       <div class="two-col">
         <div>
           <div style="font-size:12px;color:var(--gold-dim);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:8px">Blokov&#233; pron&#225;jmy</div>
-          <div class="cfo-row"><span>Hodin / m&#283;s&#237;c</span><input class="cfo-input" type="number" id="rental-h" min="0" step="1" value="20" oninput="updateModel()"></div>
-          <div class="cfo-row"><span>Cena za hodinu (K&#269;)</span><input class="cfo-input" type="number" id="rental-price" min="0" step="50" value="800" oninput="updateModel()"></div>
+          <div class="cfo-row"><span>Hodin / m&#283;s&#237;c</span><input class="cfo-input" type="number" id="rental-h" min="0" step="1" value="20" onchange="updateModel()" onblur="updateModel()"></div>
+          <div class="cfo-row"><span>Cena za hodinu (K&#269;)</span><input class="cfo-input" type="number" id="rental-price" min="0" step="50" value="800" onchange="updateModel()" onblur="updateModel()"></div>
           <div style="font-size:12px;color:var(--gold-dim);margin-top:6px;text-align:right">P&#345;&#237;jem: <strong style="color:var(--gold)" id="rental-total">16 000 K&#269;/m&#283;s</strong></div>
         </div>
         <div>
           <div style="font-size:12px;color:var(--gold-dim);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:8px">Drop-in vstupy</div>
-          <div class="cfo-row"><span>Vstup&#367; / m&#283;s&#237;c</span><input class="cfo-input" type="number" id="dropin" min="0" step="1" value="10" oninput="updateModel()"></div>
-          <div class="cfo-row"><span>Cena za vstup (K&#269;)</span><input class="cfo-input" type="number" id="dropin-price" min="0" step="50" value="350" oninput="updateModel()"></div>
+          <div class="cfo-row"><span>Vstup&#367; / m&#283;s&#237;c</span><input class="cfo-input" type="number" id="dropin" min="0" step="1" value="10" onchange="updateModel()" onblur="updateModel()"></div>
+          <div class="cfo-row"><span>Cena za vstup (K&#269;)</span><input class="cfo-input" type="number" id="dropin-price" min="0" step="50" value="350" onchange="updateModel()" onblur="updateModel()"></div>
           <div style="font-size:12px;color:var(--gold-dim);margin-top:6px;text-align:right">P&#345;&#237;jem: <strong style="color:var(--gold)" id="dropin-total">3 500 K&#269;/m&#283;s</strong></div>
         </div>
       </div>
@@ -345,25 +345,21 @@
 
     <div class="two-col">
       <div class="card">
-        <div class="card-title">CAPEX &mdash; investice (rozpo&ccaron;et 1 200 000 K&ccaron;)</div>
-        <div class="cfo-row"><span>Stavebn&iacute; &uacute;pravy</span><input class="cfo-input" type="number" id="capex-stavba" placeholder="0" oninput="saveCFO()"></div>
-        <div class="cfo-row"><span>Sprchy + &scaron;atny</span><input class="cfo-input" type="number" id="capex-sprchy" placeholder="0" oninput="saveCFO()"></div>
-        <div class="cfo-row"><span>Vybaven&iacute; (stroje, z&aacute;va&zcaron;&iacute;, cardio)</span><input class="cfo-input" type="number" id="capex-vybaveni" placeholder="0" oninput="saveCFO()"></div>
-        <div class="cfo-row"><span>Smart-entry syst&eacute;m</span><input class="cfo-input" type="number" id="capex-smart" placeholder="0" oninput="saveCFO()"></div>
-        <div class="cfo-row"><span>Design + interi&eacute;r + branding</span><input class="cfo-input" type="number" id="capex-design" placeholder="0" oninput="saveCFO()"></div>
-        <div class="cfo-row"><span>Ostatn&iacute; CAPEX</span><input class="cfo-input" type="number" id="capex-other" placeholder="0" oninput="saveCFO()"></div>
-        <div class="cfo-total"><span>Utra&ccaron;eno z CAPEX</span><span id="capex-spent">0 K&ccaron;</span></div>
+        <div class="card-title">CAPEX &mdash; investice (rozpo&#269;et 1 200 000 K&#269;)</div>
+        <div id="capex-rows"></div>
+        <button class="cfo-btn" style="margin-top:8px" onclick="addCfoRow('capex')">+ P&#345;idat polo&#382;ku</button>
+        <div class="cfo-total"><span>Utraceno z CAPEX</span><span id="capex-spent">0 K&#269;</span></div>
         <div class="cfo-bar"><div class="cfo-bar-fill cfo-bar-gold" id="capex-bar" style="width:0%"></div></div>
-        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--color-text-secondary)"><span id="capex-remaining">Zb&yacute;v&aacute;: 1 200 000 K&ccaron;</span><span>Budget: 1 200 000 K&ccaron;</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--color-text-secondary)"><span id="capex-remaining">Zb&#253;v&#225;: 1 200 000 K&#269;</span><span>Budget: 1 200 000 K&#269;</span></div>
       </div>
       <div class="card">
         <div class="card-title">Provozn&iacute; rezerva (200 000 K&ccaron;)</div>
-        <div class="cfo-row"><span>&Ccaron;erp&aacute;no z rezervy</span><input class="cfo-input" type="number" id="reserve-drawn" placeholder="0" oninput="saveCFO()"></div>
+        <div class="cfo-row"><span>&Ccaron;erp&aacute;no z rezervy</span><input class="cfo-input" type="number" id="reserve-drawn" placeholder="0" onchange="saveCFO();updateCFO()" onblur="saveCFO();updateCFO()"></div>
         <div class="cfo-total"><span>Zb&yacute;v&aacute; z rezervy</span><span id="reserve-remaining" style="color:var(--gold)">200 000 K&ccaron;</span></div>
         <div class="cfo-bar"><div class="cfo-bar-fill cfo-bar-gold" id="reserve-bar" style="width:0%"></div></div>
         <div style="margin-top:16px">
           <div class="card-title" style="margin-bottom:8px">Runway kalkul&aacute;tor</div>
-          <div class="cfo-row"><span>M&ecaron;s&iacute;&ccaron;n&iacute; ztr&aacute;ta (odhad)</span><input class="cfo-input" type="number" id="monthly-loss" placeholder="0" oninput="saveCFO()"></div>
+          <div class="cfo-row"><span>M&ecaron;s&iacute;&ccaron;n&iacute; ztr&aacute;ta (odhad)</span><input class="cfo-input" type="number" id="monthly-loss" placeholder="0" onchange="saveCFO();updateCFO()" onblur="saveCFO();updateCFO()"></div>
           <div class="cfo-total"><span>M&ecaron;s&iacute;c&ucirc; runway</span><span id="runway-months" style="color:var(--gold)">&#8734;</span></div>
         </div>
       </div>
@@ -373,22 +369,16 @@
       <div class="card-title">M&ecaron;s&iacute;&ccaron;n&iacute; provoz &mdash; aktu&aacute;ln&iacute; &ccaron;&iacute;sla</div>
       <div class="two-col">
         <div>
-          <div style="font-size:12px;color:var(--gold-dim);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:8px">P&rcaron;&iacute;jmy</div>
-          <div class="cfo-row"><span>&Ccaron;lenstv&iacute;</span><input class="cfo-input" type="number" id="ops-membership" placeholder="0" oninput="saveCFO()"></div>
-          <div class="cfo-row"><span>Blokov&eacute; pron&aacute;jmy</span><input class="cfo-input" type="number" id="ops-rental" placeholder="0" oninput="saveCFO()"></div>
-          <div class="cfo-row"><span>Drop-in</span><input class="cfo-input" type="number" id="ops-dropin" placeholder="0" oninput="saveCFO()"></div>
-          <div class="cfo-row"><span>Ostatn&iacute; p&rcaron;&iacute;jmy</span><input class="cfo-input" type="number" id="ops-other-rev" placeholder="0" oninput="saveCFO()"></div>
-          <div class="cfo-total"><span>Celkem p&rcaron;&iacute;jmy</span><span id="ops-total-rev" style="color:var(--gold)">0 K&ccaron;</span></div>
+          <div style="font-size:12px;color:var(--gold-dim);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:8px">P&#345;&#237;jmy</div>
+          <div id="ops-rev-rows"></div>
+          <button class="cfo-btn" style="font-size:11px;padding:3px 8px;margin-top:6px" onclick="addCfoRow('ops-rev')">+ P&#345;&#237;jem</button>
+          <div class="cfo-total"><span>Celkem p&#345;&#237;jmy</span><span id="ops-total-rev" style="color:var(--gold)">0 K&#269;</span></div>
         </div>
         <div>
-          <div style="font-size:12px;color:var(--gold-dim);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:8px">N&aacute;klady</div>
-          <div class="cfo-row"><span>N&aacute;jem</span><input class="cfo-input" type="number" id="ops-rent" value="28000" oninput="saveCFO()"></div>
-          <div class="cfo-row"><span>Energie + voda</span><input class="cfo-input" type="number" id="ops-energy" value="8000" oninput="saveCFO()"></div>
-          <div class="cfo-row"><span>Admin + &uacute;&ccaron;etnictv&iacute;</span><input class="cfo-input" type="number" id="ops-admin" value="5000" oninput="saveCFO()"></div>
-          <div class="cfo-row"><span>Poji&scaron;t&ecaron;n&iacute;</span><input class="cfo-input" type="number" id="ops-insurance" value="2000" oninput="saveCFO()"></div>
-          <div class="cfo-row"><span>Marketing</span><input class="cfo-input" type="number" id="ops-marketing" value="5000" oninput="saveCFO()"></div>
-          <div class="cfo-row"><span>Ostatn&iacute; n&aacute;klady</span><input class="cfo-input" type="number" id="ops-other-cost" placeholder="0" oninput="saveCFO()"></div>
-          <div class="cfo-total"><span>Celkem n&aacute;klady</span><span id="ops-total-cost" style="color:var(--color-neg)">0 K&ccaron;</span></div>
+          <div style="font-size:12px;color:var(--gold-dim);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:8px">N&#225;klady</div>
+          <div id="ops-cost-rows"></div>
+          <button class="cfo-btn" style="font-size:11px;padding:3px 8px;margin-top:6px" onclick="addCfoRow('ops-cost')">+ N&#225;klad</button>
+          <div class="cfo-total"><span>Celkem n&#225;klady</span><span id="ops-total-cost" style="color:var(--color-neg)">0 K&#269;</span></div>
         </div>
       </div>
       <div style="margin-top:12px;padding-top:12px;border-top:2px solid var(--color-border-secondary);display:flex;justify-content:space-between;align-items:center">
@@ -562,9 +552,26 @@ let cfChart = null, mixChart = null;
 
 // === TIER SYSTEM ===
 let tiers = [
-  { name: 'Standard', price: 2500, members: 20 },
-  { name: 'Premium', price: 3900, members: 10 },
-  { name: 'VIP', price: 6500, members: 5 },
+  { name: 'Standard', price: 2500, members: 20, services: [
+    'Rezervace: 2 týdny dopředu',
+    'Okno: 1h denně (1h15 slot = 1h trénink + 15min šatna)',
+    'Provozní doba: 6:00–22:00',
+  ]},
+  { name: 'Premium', price: 3900, members: 10, services: [
+    'Rezervace: 1 měsíc dopředu',
+    'Okno: 1.5h denně (1–2 sloty)',
+    'Protein shake 1x za návštěvu',
+    'Host: 2x měsíčně (max 1 osoba)',
+    'Vlastní skříňka',
+  ]},
+  { name: 'VIP', price: 6500, members: 5, services: [
+    'Rezervace: 2 měsíce dopředu',
+    'Okno: 2h denně (2 sloty)',
+    'Protein shake zdarma vždy',
+    'Host: kdykoli (max 1 osoba)',
+    'Vlastní skříňka + ručník',
+    'PT konzultace 1x měsíčně',
+  ]},
 ];
 
 function renderTiers() {
@@ -572,25 +579,38 @@ function renderTiers() {
   c.innerHTML = tiers.map((t, i) => `
     <div class="tier-builder">
       <div class="tier-builder-header">
-        <input class="tier-builder-name" value="${t.name}" oninput="tiers[${i}].name=this.value;updateModel()">
+        <input class="tier-builder-name" value="${t.name}" onchange="tiers[${i}].name=this.value;updateModel()">
         ${tiers.length > 1 ? `<button class="tier-remove" onclick="removeTier(${i})">×</button>` : ''}
       </div>
       <div class="cfo-row">
         <span>Cena (Kč/měs)</span>
-        <input class="cfo-input" type="number" min="0" max="99999" step="100" value="${t.price}" oninput="tiers[${i}].price=+this.value;updateModel()">
+        <input class="cfo-input" type="number" min="0" step="1" value="${t.price}" onchange="tiers[${i}].price=+this.value||0;updateModel()" onblur="tiers[${i}].price=+this.value||0;updateModel()">
       </div>
       <div class="cfo-row">
         <span>Počet členů</span>
-        <input class="cfo-input" type="number" min="0" max="200" step="1" value="${t.members}" oninput="tiers[${i}].members=+this.value;updateModel()">
+        <input class="cfo-input" type="number" min="0" step="1" value="${t.members}" onchange="tiers[${i}].members=+this.value||0;updateModel()" onblur="tiers[${i}].members=+this.value||0;updateModel()">
       </div>
-      <div style="font-size:12px;color:var(--gold-dim);margin-top:6px;text-align:right">Příjem: <strong style="color:var(--gold)">${fmt(t.price * t.members)}/měs</strong></div>
+      <div style="font-size:12px;color:var(--gold-dim);margin-top:6px;text-align:right">Příjem: <strong style="color:var(--gold)" id="tier-rev-${i}">${fmt(t.price * t.members)}/měs</strong></div>
+      <div style="margin-top:10px;padding-top:8px;border-top:1px solid var(--color-border-tertiary)">
+        <div style="font-size:11px;color:var(--gold-dim);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:6px">Služby v ceně</div>
+        <div id="tier-services-${i}">
+          ${t.services.map((s, si) => `
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
+              <span style="color:var(--gold);font-size:11px">&#9670;</span>
+              <input style="flex:1;background:transparent;border:none;border-bottom:1px solid var(--color-border-tertiary);color:var(--color-text-primary);font-size:12px;padding:3px 0;font-family:var(--font-sans)" value="${s}" onchange="tiers[${i}].services[${si}]=this.value">
+              <button style="background:none;border:none;color:var(--color-text-secondary);cursor:pointer;font-size:14px;padding:2px" onclick="tiers[${i}].services.splice(${si},1);renderTiers()">×</button>
+            </div>
+          `).join('')}
+        </div>
+        <button class="cfo-btn" style="font-size:11px;padding:3px 8px;margin-top:4px" onclick="tiers[${i}].services.push('Nová služba');renderTiers()">+ služba</button>
+      </div>
     </div>
   `).join('');
 }
 
 function addTier() {
-  if (tiers.length >= 6) return;
-  tiers.push({ name: 'Tier ' + (tiers.length + 1), price: 1000, members: 0 });
+  if (tiers.length >= 8) return;
+  tiers.push({ name: 'Tier ' + (tiers.length + 1), price: 0, members: 0, services: ['Základní přístup 6:00–22:00'] });
   renderTiers();
   updateModel();
 }
@@ -734,33 +754,79 @@ function updateModel() {
     }
   });
 
-  // Update tier display
-  renderTiers();
+  // Update tier revenue displays (without rebuilding inputs)
+  tiers.forEach((t, i) => {
+    const el = document.getElementById('tier-rev-' + i);
+    if (el) el.textContent = fmt(t.price * t.members) + '/měs';
+  });
 }
 
-// === CFO DASHBOARD ===
-const CFO_FIELDS = ['capex-stavba', 'capex-sprchy', 'capex-vybaveni', 'capex-smart', 'capex-design', 'capex-other', 'reserve-drawn', 'monthly-loss', 'ops-membership', 'ops-rental', 'ops-dropin', 'ops-other-rev', 'ops-rent', 'ops-energy', 'ops-admin', 'ops-insurance', 'ops-marketing', 'ops-other-cost'];
+// === CFO DASHBOARD — Dynamic rows ===
+let cfoData = {
+  capex: [
+    { name: 'Stavební úpravy', value: 0 },
+    { name: 'Sprchy + šatny', value: 0 },
+    { name: 'Vybavení (stroje, závaží, cardio)', value: 0 },
+    { name: 'Smart-entry systém', value: 0 },
+    { name: 'Design + interiér + branding', value: 0 },
+  ],
+  'ops-rev': [
+    { name: 'Členství', value: 0 },
+    { name: 'Blokové pronájmy', value: 0 },
+    { name: 'Drop-in', value: 0 },
+  ],
+  'ops-cost': [
+    { name: 'Nájem', value: 28000 },
+    { name: 'Energie + voda', value: 8000 },
+    { name: 'Admin + účetnictví', value: 5000 },
+    { name: 'Pojištění', value: 2000 },
+    { name: 'Marketing', value: 5000 },
+  ],
+  reserveDrawn: 0,
+  monthlyLoss: 0,
+};
+
+function renderCfoRows(section) {
+  const container = document.getElementById(section + '-rows');
+  if (!container) return;
+  container.innerHTML = cfoData[section].map((r, i) => `
+    <div class="cfo-row">
+      <input style="flex:1;background:transparent;border:none;border-bottom:1px solid var(--color-border-tertiary);color:var(--color-text-primary);font-size:13px;padding:3px 0;font-family:var(--font-sans)" value="${r.name}" onchange="cfoData['${section}'][${i}].name=this.value;saveCFO()">
+      <input class="cfo-input" type="number" step="1" value="${r.value}" onchange="cfoData['${section}'][${i}].value=+this.value||0;saveCFO();updateCFO()" onblur="cfoData['${section}'][${i}].value=+this.value||0;saveCFO();updateCFO()">
+      <button style="background:none;border:none;color:var(--color-text-secondary);cursor:pointer;font-size:14px;padding:2px 4px" onclick="cfoData['${section}'].splice(${i},1);saveCFO();renderCfoRows('${section}');updateCFO()">×</button>
+    </div>
+  `).join('');
+}
+
+function addCfoRow(section) {
+  cfoData[section].push({ name: 'Nová položka', value: 0 });
+  saveCFO();
+  renderCfoRows(section);
+}
 
 function saveCFO() {
-  const data = {};
-  CFO_FIELDS.forEach(id => { data[id] = document.getElementById(id).value; });
-  localStorage.setItem('gym-cfo', JSON.stringify(data));
-  updateCFO();
+  localStorage.setItem('gym-cfo-v2', JSON.stringify(cfoData));
 }
 
 function loadCFO() {
   try {
-    const data = JSON.parse(localStorage.getItem('gym-cfo'));
-    if (data) CFO_FIELDS.forEach(id => { if (data[id] !== undefined) document.getElementById(id).value = data[id]; });
+    const d = JSON.parse(localStorage.getItem('gym-cfo-v2'));
+    if (d && d.capex) cfoData = d;
   } catch (e) {}
+  renderCfoRows('capex');
+  renderCfoRows('ops-rev');
+  renderCfoRows('ops-cost');
+  // Load scalar fields
+  const rd = document.getElementById('reserve-drawn');
+  const ml = document.getElementById('monthly-loss');
+  if (rd) rd.value = cfoData.reserveDrawn || 0;
+  if (ml) ml.value = cfoData.monthlyLoss || 0;
   updateCFO();
 }
 
 function updateCFO() {
-  const v = id => +(document.getElementById(id).value) || 0;
-
   // CAPEX
-  const capexSpent = v('capex-stavba') + v('capex-sprchy') + v('capex-vybaveni') + v('capex-smart') + v('capex-design') + v('capex-other');
+  const capexSpent = cfoData.capex.reduce((s, r) => s + (r.value || 0), 0);
   const capexRemaining = CAPEX_BUDGET - capexSpent;
   const capexPct = Math.min(100, (capexSpent / CAPEX_BUDGET) * 100);
   document.getElementById('capex-spent').textContent = fmt(capexSpent);
@@ -769,7 +835,9 @@ function updateCFO() {
   document.getElementById('capex-bar').className = 'cfo-bar-fill ' + (capexPct > 95 ? 'cfo-bar-red' : 'cfo-bar-gold');
 
   // Reserve
+  const v = id => +(document.getElementById(id).value) || 0;
   const reserveDrawn = v('reserve-drawn');
+  cfoData.reserveDrawn = reserveDrawn;
   const reserveRemaining = RESERVE_BUDGET - reserveDrawn;
   const reservePct = Math.min(100, (reserveDrawn / RESERVE_BUDGET) * 100);
   document.getElementById('reserve-remaining').textContent = fmt(reserveRemaining);
@@ -779,13 +847,14 @@ function updateCFO() {
 
   // Runway
   const monthlyLoss = v('monthly-loss');
+  cfoData.monthlyLoss = monthlyLoss;
   const runwayMonths = monthlyLoss > 0 ? Math.floor(reserveRemaining / monthlyLoss) : Infinity;
   document.getElementById('runway-months').textContent = runwayMonths === Infinity ? '∞' : runwayMonths + ' měs';
   document.getElementById('runway-months').style.color = runwayMonths < 3 ? '#c45c5c' : '#c9a96e';
 
   // Monthly ops
-  const totalRev = v('ops-membership') + v('ops-rental') + v('ops-dropin') + v('ops-other-rev');
-  const totalCost = v('ops-rent') + v('ops-energy') + v('ops-admin') + v('ops-insurance') + v('ops-marketing') + v('ops-other-cost');
+  const totalRev = cfoData['ops-rev'].reduce((s, r) => s + (r.value || 0), 0);
+  const totalCost = cfoData['ops-cost'].reduce((s, r) => s + (r.value || 0), 0);
   const opsEbitda = totalRev - totalCost;
   document.getElementById('ops-total-rev').textContent = fmt(totalRev);
   document.getElementById('ops-total-cost').textContent = '−' + fmt(totalCost);
