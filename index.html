@@ -160,35 +160,54 @@
 <body>
 <div class="app">
   <div class="logo-header">
-    <!-- Gorilla mascot + dumbbell logo -->
     <div class="logo-svg">
-      <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Outer ring -->
-        <circle cx="32" cy="32" r="30" stroke="#c9a96e" stroke-width="1.5"/>
-        <circle cx="32" cy="32" r="27" stroke="#a08440" stroke-width="0.5"/>
-        <!-- Gorilla head - geometric/minimal -->
-        <g transform="translate(32,28)" fill="#c9a96e">
-          <!-- Head shape -->
-          <path d="M0-14C-7-14-12-9-12-3C-12 0-11 3-9 5C-8 7-5 9-3 10L-1 11L0 14L1 11L3 10C5 9 8 7 9 5C11 3 12 0 12-3C12-9 7-14 0-14Z" fill="#c9a96e"/>
-          <!-- Brow ridge -->
-          <path d="M-10-4C-10-4-7-8-0-8C7-8 10-4 10-4C10-5 8-10 0-10C-8-10-10-5-10-4Z" fill="#0a0a0a"/>
-          <!-- Eyes -->
-          <ellipse cx="-4.5" cy="-3" rx="1.8" ry="1.4" fill="#0a0a0a"/>
-          <ellipse cx="4.5" cy="-3" rx="1.8" ry="1.4" fill="#0a0a0a"/>
-          <ellipse cx="-4" cy="-3.2" rx="0.6" ry="0.5" fill="#c9a96e"/>
-          <ellipse cx="5" cy="-3.2" rx="0.6" ry="0.5" fill="#c9a96e"/>
-          <!-- Nose/muzzle -->
-          <path d="M-4 1C-4 1-5 4-4 6C-3 7.5-1.5 8 0 8C1.5 8 3 7.5 4 6C5 4 4 1 4 1C2.5 2 1.5 2.5 0 2.5C-1.5 2.5-2.5 2-4 1Z" fill="#a08440"/>
-          <!-- Nostrils -->
-          <ellipse cx="-1.5" cy="4.5" rx="1" ry="0.7" fill="#0a0a0a"/>
-          <ellipse cx="1.5" cy="4.5" rx="1" ry="0.7" fill="#0a0a0a"/>
+      <svg width="72" height="72" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Hexagonal frame -->
+        <polygon points="50,3 93,27 93,73 50,97 7,73 7,27" stroke="#c9a96e" stroke-width="2" fill="none"/>
+        <polygon points="50,8 89,29.5 89,70.5 50,92 11,70.5 11,29.5" stroke="#a08440" stroke-width="0.5" fill="none"/>
+        <!-- Gorilla upper body silhouette - powerful muscular pose -->
+        <g fill="#c9a96e">
+          <!-- Trapezius / shoulders - massive -->
+          <path d="M50 22C44 22 38 24 34 28C30 32 26 34 22 36C20 37 18 39 18 42C18 45 20 47 23 47L28 46C30 45 32 44 33 42L35 38C36 36 38 35 40 35L60 35C62 35 64 36 65 38L67 42C68 44 70 45 72 46L77 47C80 47 82 45 82 42C82 39 80 37 78 36C74 34 70 32 66 28C62 24 56 22 50 22Z"/>
+          <!-- Head -->
+          <path d="M50 18C43 18 38 22 38 27C38 29 39 31 40 32C41 33 43 34 45 34.5C46 35 48 35.5 50 35.5C52 35.5 54 35 55 34.5C57 34 59 33 60 32C61 31 62 29 62 27C62 22 57 18 50 18Z"/>
+          <!-- Brow ridge - heavy, powerful -->
+          <rect x="39" y="24" width="22" height="3" rx="1.5" fill="#a08440"/>
+          <!-- Eyes - intense, small -->
+          <ellipse cx="44" cy="27" rx="1.5" ry="1" fill="#0a0a0a"/>
+          <ellipse cx="56" cy="27" rx="1.5" ry="1" fill="#0a0a0a"/>
+          <!-- Nose/mouth area -->
+          <ellipse cx="50" cy="31" rx="4" ry="2.5" fill="#a08440"/>
+          <ellipse cx="48.5" cy="30.5" rx="0.8" ry="0.6" fill="#0a0a0a"/>
+          <ellipse cx="51.5" cy="30.5" rx="0.8" ry="0.6" fill="#0a0a0a"/>
+          <!-- Chest / pecs - defined split -->
+          <path d="M38 42C38 42 40 40 44 39L49 38.5L49 50L41 48C39 47 38 45 38 42Z"/>
+          <path d="M62 42C62 42 60 40 56 39L51 38.5L51 50L59 48C61 47 62 45 62 42Z"/>
+          <!-- Abs hint - center line -->
+          <line x1="50" y1="50" x2="50" y2="62" stroke="#a08440" stroke-width="0.8"/>
+          <!-- Left bicep - bulging -->
+          <path d="M33 42C31 44 28 46 27 49C26 52 27 55 29 57C31 59 34 58 35 56C36 54 37 51 37 48C37 45 36 43 35 42Z"/>
+          <!-- Right bicep - bulging -->
+          <path d="M67 42C69 44 72 46 73 49C74 52 73 55 71 57C69 59 66 58 65 56C64 54 63 51 63 48C63 45 64 43 65 42Z"/>
+          <!-- Left forearm + fist holding dumbbell -->
+          <path d="M29 57C28 59 26 62 25 64C24 66 25 67 27 67L31 67C33 67 34 66 34 64C34 62 33 60 32 58Z"/>
+          <!-- Right forearm + fist -->
+          <path d="M71 57C72 59 74 62 75 64C76 66 75 67 73 67L69 67C67 67 66 66 66 64C66 62 67 60 68 58Z"/>
         </g>
-        <!-- Small dumbbell at bottom -->
-        <g transform="translate(32,54)" stroke="#c9a96e" stroke-width="1.2" fill="none">
-          <rect x="-10" y="-2.5" width="4" height="5" rx="1" fill="#a08440"/>
-          <rect x="6" y="-2.5" width="4" height="5" rx="1" fill="#a08440"/>
-          <line x1="-6" y1="0" x2="6" y2="0" stroke-width="1.5"/>
+        <!-- Dumbbell in hands -->
+        <g fill="#c9a96e" stroke="#c9a96e" stroke-width="0.5">
+          <!-- Left weight plate -->
+          <rect x="19" y="62" width="6" height="10" rx="2" fill="#a08440"/>
+          <!-- Right weight plate -->
+          <rect x="75" y="62" width="6" height="10" rx="2" fill="#a08440"/>
+          <!-- Bar -->
+          <rect x="25" y="65.5" width="50" height="3" rx="1.5" fill="#c9a96e"/>
+          <!-- Inner plates -->
+          <rect x="27" y="63.5" width="4" height="7" rx="1" fill="#a08440"/>
+          <rect x="69" y="63.5" width="4" height="7" rx="1" fill="#a08440"/>
         </g>
+        <!-- Core / lower torso -->
+        <path d="M40 50C40 55 42 60 44 63L50 65L56 63C58 60 60 55 60 50" fill="#c9a96e"/>
       </svg>
     </div>
     <div class="logo-text">
