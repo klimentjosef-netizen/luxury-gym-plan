@@ -539,19 +539,19 @@ function renderTiers() {
     <div class="tier-builder">
       <div class="tier-builder-header">
         <input class="tier-builder-name" value="${t.name}" oninput="tiers[${i}].name=this.value;updateModel()">
-        ${tiers.length > 1 ? `<button class="tier-remove" onclick="removeTier(${i})">&times;</button>` : ''}
+        ${tiers.length > 1 ? `<button class="tier-remove" onclick="removeTier(${i})">×</button>` : ''}
       </div>
       <div class="slider-row">
-        <span class="slider-label">Cena (K&ccaron;/m&ecaron;s)</span>
+        <span class="slider-label">Cena (Kč/měs)</span>
         <input type="range" min="0" max="20000" step="100" value="${t.price}" oninput="tiers[${i}].price=+this.value;updateModel()">
-        <span class="slider-val">${fmtN(t.price)} K&ccaron;</span>
+        <span class="slider-val">${fmtN(t.price)} Kč</span>
       </div>
       <div class="slider-row">
-        <span class="slider-label">Po&ccaron;et &ccaron;len&ucirc;</span>
+        <span class="slider-label">Počet členů</span>
         <input type="range" min="0" max="50" step="1" value="${t.members}" oninput="tiers[${i}].members=+this.value;updateModel()">
         <span class="slider-val">${t.members}</span>
       </div>
-      <div style="font-size:12px;color:var(--gold-dim);margin-top:4px">P&rcaron;&iacute;jem z tohoto tieru: <strong style="color:var(--gold)">${fmt(t.price * t.members)}/m&ecaron;s</strong></div>
+      <div style="font-size:12px;color:var(--gold-dim);margin-top:4px">Příjem z tohoto tieru: <strong style="color:var(--gold)">${fmt(t.price * t.members)}/měs</strong></div>
     </div>
   `).join('');
 }
@@ -802,7 +802,7 @@ function buildQuestions() {
     { q: "Povoluje nájemní smlouva provoz fitness?", status: "resolved", answer: "Ano, povoluje." },
     { q: "Hygienické požadavky na šatny a sprchy?", status: "resolved", answer: "Víme, požadavky jsou známé." },
     { q: "Podmínky pojišťovny pro provoz?", status: "resolved", answer: "Víme, řešíme." },
-    { q: "Živnostenský list: volná nebo vázaná živnost?", status: "open", answer: "Bude jen provoz fitness centra (bez osobního tréninku). Stačí volná živnost: „Provozování tělovýchovných a sportovních zařízení a organizování sportovní činnosti". Přidat na živnostenském úřadě na stávající s.r.o. za 1 000 Kč." },
+    { q: "Živnostenský list: volná nebo vázaná živnost?", status: "open", answer: "Bude jen provoz fitness centra (bez osobního tréninku). Stačí volná živnost: 'Provozování tělovýchovných a sportovních zařízení a organizování sportovní činnosti'. Přidat na živnostenském úřadě na stávající s.r.o. za 1 000 Kč." },
     { q: "Je pronajímatel plátce DPH? Jak řešit platby?", status: "open", answer: "S.r.o. bude vlastník provozu. Doporučení: GoPay nebo Stripe pro automatické inkaso členských poplatků. Trvalý příkaz jako záloha. Konzultovat s daňovým poradcem ohledně DPH nájmu." },
     { q: "Minimální délka nájmu?", status: "resolved", answer: "10 let — potvrzeno." },
   ];
