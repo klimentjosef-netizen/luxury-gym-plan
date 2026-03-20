@@ -289,14 +289,14 @@
       <div class="two-col">
         <div>
           <div style="font-size:12px;color:var(--gold-dim);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:8px">Blokov&#233; pron&#225;jmy</div>
-          <div class="cfo-row"><span>Hodin / m&#283;s&#237;c</span><input class="cfo-input" type="number" id="rental-h" min="0" step="1" value="20" onchange="updateModel()" onblur="updateModel()"></div>
-          <div class="cfo-row"><span>Cena za hodinu (K&#269;)</span><input class="cfo-input" type="number" id="rental-price" min="0" step="50" value="800" onchange="updateModel()" onblur="updateModel()"></div>
+          <div class="cfo-row"><span>Hodin / m&#283;s&#237;c</span><input class="cfo-input" type="number" id="rental-h" min="0" step="1" value="20" onchange="saveExtras();updateModel()" onblur="saveExtras();updateModel()"></div>
+          <div class="cfo-row"><span>Cena za hodinu (K&#269;)</span><input class="cfo-input" type="number" id="rental-price" min="0" step="50" value="800" onchange="saveExtras();updateModel()" onblur="saveExtras();updateModel()"></div>
           <div style="font-size:12px;color:var(--gold-dim);margin-top:6px;text-align:right">P&#345;&#237;jem: <strong style="color:var(--gold)" id="rental-total">16 000 K&#269;/m&#283;s</strong></div>
         </div>
         <div>
           <div style="font-size:12px;color:var(--gold-dim);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:8px">Drop-in vstupy</div>
-          <div class="cfo-row"><span>Vstup&#367; / m&#283;s&#237;c</span><input class="cfo-input" type="number" id="dropin" min="0" step="1" value="10" onchange="updateModel()" onblur="updateModel()"></div>
-          <div class="cfo-row"><span>Cena za vstup (K&#269;)</span><input class="cfo-input" type="number" id="dropin-price" min="0" step="50" value="350" onchange="updateModel()" onblur="updateModel()"></div>
+          <div class="cfo-row"><span>Vstup&#367; / m&#283;s&#237;c</span><input class="cfo-input" type="number" id="dropin" min="0" step="1" value="10" onchange="saveExtras();updateModel()" onblur="saveExtras();updateModel()"></div>
+          <div class="cfo-row"><span>Cena za vstup (K&#269;)</span><input class="cfo-input" type="number" id="dropin-price" min="0" step="50" value="350" onchange="saveExtras();updateModel()" onblur="saveExtras();updateModel()"></div>
           <div style="font-size:12px;color:var(--gold-dim);margin-top:6px;text-align:right">P&#345;&#237;jem: <strong style="color:var(--gold)" id="dropin-total">3 500 K&#269;/m&#283;s</strong></div>
         </div>
       </div>
@@ -537,7 +537,7 @@ const OPEX_VAR_PCT = 0.05;
 let cfChart = null, mixChart = null;
 
 // === TIER SYSTEM ===
-let tiers = [
+const DEFAULT_TIERS = [
   { name: 'Standard', price: 2500, members: 20, services: [
     'Rezervace: 2 týdny dopředu',
     'Okno: 1h denně (1h15 slot = 1h trénink + 15min šatna)',
@@ -559,22 +559,53 @@ let tiers = [
     'PT konzultace 1x měsíčně',
   ]},
 ];
+let tiers = JSON.parse(JSON.stringify(DEFAULT_TIERS));
+
+function saveTiers() {
+  localStorage.setItem('gym-tiers', JSON.stringify(tiers));
+}
+function loadTiers() {
+  try {
+    const d = JSON.parse(localStorage.getItem('gym-tiers'));
+    if (d && Array.isArray(d) && d.length > 0) tiers = d;
+  } catch(e) {}
+}
+function saveExtras() {
+  const data = {
+    rentalH: document.getElementById('rental-h').value,
+    rentalP: document.getElementById('rental-price').value,
+    dropinQ: document.getElementById('dropin').value,
+    dropinP: document.getElementById('dropin-price').value,
+  };
+  localStorage.setItem('gym-extras', JSON.stringify(data));
+}
+function loadExtras() {
+  try {
+    const d = JSON.parse(localStorage.getItem('gym-extras'));
+    if (d) {
+      if (d.rentalH !== undefined) document.getElementById('rental-h').value = d.rentalH;
+      if (d.rentalP !== undefined) document.getElementById('rental-price').value = d.rentalP;
+      if (d.dropinQ !== undefined) document.getElementById('dropin').value = d.dropinQ;
+      if (d.dropinP !== undefined) document.getElementById('dropin-price').value = d.dropinP;
+    }
+  } catch(e) {}
+}
 
 function renderTiers() {
   const c = document.getElementById('tier-container');
   c.innerHTML = tiers.map((t, i) => `
     <div class="tier-builder">
       <div class="tier-builder-header">
-        <input class="tier-builder-name" value="${t.name}" onchange="tiers[${i}].name=this.value;updateModel()">
+        <input class="tier-builder-name" value="${t.name}" onchange="tiers[${i}].name=this.value;saveTiers();updateModel()">
         ${tiers.length > 1 ? `<button class="tier-remove" onclick="removeTier(${i})">×</button>` : ''}
       </div>
       <div class="cfo-row">
         <span>Cena (Kč/měs)</span>
-        <input class="cfo-input" type="number" min="0" step="1" value="${t.price}" onchange="tiers[${i}].price=+this.value||0;updateModel()" onblur="tiers[${i}].price=+this.value||0;updateModel()">
+        <input class="cfo-input" type="number" min="0" step="1" value="${t.price}" onchange="tiers[${i}].price=+this.value||0;saveTiers();updateModel()" onblur="tiers[${i}].price=+this.value||0;saveTiers();updateModel()">
       </div>
       <div class="cfo-row">
         <span>Počet členů</span>
-        <input class="cfo-input" type="number" min="0" step="1" value="${t.members}" onchange="tiers[${i}].members=+this.value||0;updateModel()" onblur="tiers[${i}].members=+this.value||0;updateModel()">
+        <input class="cfo-input" type="number" min="0" step="1" value="${t.members}" onchange="tiers[${i}].members=+this.value||0;saveTiers();updateModel()" onblur="tiers[${i}].members=+this.value||0;saveTiers();updateModel()">
       </div>
       <div style="font-size:12px;color:var(--gold-dim);margin-top:6px;text-align:right">Příjem: <strong style="color:var(--gold)" id="tier-rev-${i}">${fmt(t.price * t.members)}/měs</strong></div>
       <div style="margin-top:10px;padding-top:8px;border-top:1px solid var(--color-border-tertiary)">
@@ -583,12 +614,12 @@ function renderTiers() {
           ${t.services.map((s, si) => `
             <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
               <span style="color:var(--gold);font-size:11px">&#9670;</span>
-              <input style="flex:1;background:transparent;border:none;border-bottom:1px solid var(--color-border-tertiary);color:var(--color-text-primary);font-size:12px;padding:3px 0;font-family:var(--font-sans)" value="${s}" onchange="tiers[${i}].services[${si}]=this.value">
-              <button style="background:none;border:none;color:var(--color-text-secondary);cursor:pointer;font-size:14px;padding:2px" onclick="tiers[${i}].services.splice(${si},1);renderTiers()">×</button>
+              <input style="flex:1;background:transparent;border:none;border-bottom:1px solid var(--color-border-tertiary);color:var(--color-text-primary);font-size:12px;padding:3px 0;font-family:var(--font-sans)" value="${s}" onchange="tiers[${i}].services[${si}]=this.value;saveTiers()">
+              <button style="background:none;border:none;color:var(--color-text-secondary);cursor:pointer;font-size:14px;padding:2px" onclick="tiers[${i}].services.splice(${si},1);saveTiers();renderTiers()">×</button>
             </div>
           `).join('')}
         </div>
-        <button class="cfo-btn" style="font-size:11px;padding:3px 8px;margin-top:4px" onclick="tiers[${i}].services.push('Nová služba');renderTiers()">+ služba</button>
+        <button class="cfo-btn" style="font-size:11px;padding:3px 8px;margin-top:4px" onclick="tiers[${i}].services.push('Nová služba');saveTiers();renderTiers()">+ služba</button>
       </div>
     </div>
   `).join('');
@@ -596,13 +627,15 @@ function renderTiers() {
 
 function addTier() {
   if (tiers.length >= 8) return;
-  tiers.push({ name: 'Tier ' + (tiers.length + 1), price: 0, members: 0, services: ['Základní přístup 6:00–22:00'] });
+  tiers.push({ name: 'Tier ' + (tiers.length + 1), price: 0, members: 0, services: ['Základní přístup 6:00/22:00'] });
+  saveTiers();
   renderTiers();
   updateModel();
 }
 
 function removeTier(i) {
   tiers.splice(i, 1);
+  saveTiers();
   renderTiers();
   updateModel();
 }
@@ -956,7 +989,9 @@ function switchTab(name) {
 })();
 
 // === INIT ===
+loadTiers();
 renderTiers();
+loadExtras();
 updateModel();
 buildQuestions();
 loadCFO();
