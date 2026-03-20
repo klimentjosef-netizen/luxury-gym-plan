@@ -140,6 +140,39 @@
       </div>
     </div>
 
+    <div class="card" style="margin-bottom: 1rem;">
+      <div class="card-title">Co jednotlivé parametry znamenají</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; font-size: 12px;">
+        <div>
+          <div style="font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px;">Počet členů (měsíčně)</div>
+          <div style="color: var(--color-text-secondary); line-height: 1.5;">Celkový počet aktivních členů s měsíčním předplatným — bez ohledu na tier (Standard, Premium, VIP). Jde o cílový stav v ustálené fázi. V ramp-up fázi (prvních 18 měsíců) model počítá s postupným náběhem od 10 % na 100 %.</div>
+        </div>
+        <div>
+          <div style="font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px;">Průměrné členství (CZK/měs)</div>
+          <div style="color: var(--color-text-secondary); line-height: 1.5;">Vážený průměr ceny napříč všemi tiery. Pokud máte 60 % Standard (2 500 Kč), 30 % Premium (3 900 Kč) a 10 % VIP (6 500 Kč), vychází průměr ~3 220 Kč. Slider umožňuje testovat, co se stane při posunu mixu směrem k dražším tierům.</div>
+        </div>
+        <div>
+          <div style="font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px;">Blokové pronájmy (hod/měs)</div>
+          <div style="color: var(--color-text-secondary); line-height: 1.5;">Počet hodin měsíčně, kdy prostor pronajímáte externím subjektům — osobním trenérům, firmám na teambuilding, skupinovým lekcím. Jde o B2B příjem nezávislý na počtu členů. Realistický odhad pro začátek: 15–25 hod/měsíc.</div>
+        </div>
+        <div>
+          <div style="font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px;">Cena bloku (CZK/hod)</div>
+          <div style="color: var(--color-text-secondary); line-height: 1.5;">Průměrná hodinová sazba za pronájem prostoru. Liší se podle denní doby — ranní bloky (700 Kč), denní (800 Kč), večerní peak (950 Kč). Slider pracuje s průměrem. Celodenní pronájem (6h+) se slevou ~650 Kč/hod.</div>
+        </div>
+        <div>
+          <div style="font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px;">Drop-in vstupy (ks/měs)</div>
+          <div style="color: var(--color-text-secondary); line-height: 1.5;">Jednorázové vstupy bez měsíčního závazku. Typicky hosté členů, náhodní kolemjdoucí, nebo lidé, kteří chtějí gym vyzkoušet před koupí členství. Slouží i jako konverzní nástroj — kdo přijde na drop-in, může se stát členem.</div>
+        </div>
+        <div>
+          <div style="font-weight: 500; color: var(--color-text-primary); margin-bottom: 2px;">Cena drop-in vstup</div>
+          <div style="color: var(--color-text-secondary); line-height: 1.5;">Cena za jeden jednorázový vstup. Záměrně nastavena výše, aby motivovala k pořízení členství. Při 350 Kč a 8 návštěvách měsíčně vyjde dráž než Standard tier — to je přesně ten konverzní mechanismus.</div>
+        </div>
+      </div>
+      <div style="margin-top: 12px; padding-top: 10px; border-top: 0.5px solid var(--color-border-tertiary); font-size: 11px; color: var(--color-text-secondary); line-height: 1.5;">
+        <strong style="color: var(--color-text-primary);">Jak model počítá:</strong> Fixní náklady (nájem 28 000 Kč, energie, účetnictví, pojištění, marketing, smart systém) = 50 000 Kč/měs. Variabilní náklady = 5 % z obratu (čistící prostředky, údržba, drobné opravy). EBITDA = příjmy − náklady. Cashflow graf počítá s ramp-up křivkou — první měsíc jen 10 % cílové kapacity, plný provoz od 18. měsíce.
+      </div>
+    </div>
+
     <div class="metrics" id="metric-cards"></div>
 
     <div class="two-col">
