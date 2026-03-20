@@ -93,15 +93,272 @@
     @media (max-width: 480px) {
       .metrics { grid-template-columns: 1fr; }
     }
+    .doc-h1 { font-size: 22px; font-weight: 600; color: var(--color-text-primary); margin: 0 0 4px; }
+    .doc-sub { font-size: 13px; color: var(--color-text-secondary); margin-bottom: 1.5rem; }
+    .doc-h2 { font-size: 16px; font-weight: 600; color: var(--color-text-primary); margin: 0 0 0.75rem; }
+    .doc-h3 { font-size: 13px; font-weight: 600; color: var(--color-text-primary); margin: 1rem 0 0.5rem; }
+    .doc-p { font-size: 13px; color: var(--color-text-secondary); line-height: 1.65; margin-bottom: 0.75rem; }
+    .doc-p strong { color: var(--color-text-primary); font-weight: 500; }
+    .doc-list { font-size: 13px; color: var(--color-text-secondary); line-height: 1.65; margin: 0 0 0.75rem 1.25rem; }
+    .doc-list li { margin-bottom: 4px; }
+    .doc-divider { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 1.5rem 0; }
+    .key-numbers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 1rem 0; }
+    .key-num { text-align: center; padding: 12px 8px; background: var(--color-background-secondary); border-radius: var(--border-radius-md); }
+    .key-num-val { font-size: 22px; font-weight: 600; color: #0F6E56; }
+    .key-num-label { font-size: 11px; color: var(--color-text-secondary); margin-top: 4px; }
+    .segment-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1rem 0; }
+    .segment-card { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem; }
+    .segment-card-title { font-size: 13px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 6px; }
+    .segment-card p { font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; margin-bottom: 4px; }
+    .step-grid { display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; margin: 1rem 0; }
+    .step-num { width: 28px; height: 28px; border-radius: 50%; background: #0F6E56; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; }
+    .step-content { padding-top: 4px; }
+    .step-content strong { font-size: 13px; color: var(--color-text-primary); display: block; }
+    .step-content span { font-size: 12px; color: var(--color-text-secondary); }
+    .risk-row { display: flex; gap: 12px; padding: 8px 0; border-bottom: 0.5px solid var(--color-border-tertiary); font-size: 12px; align-items: flex-start; }
+    .risk-badge { font-size: 10px; padding: 2px 6px; border-radius: 4px; white-space: nowrap; font-weight: 500; }
+    .risk-high { background: #FEE2E2; color: #991B1B; }
+    .risk-med { background: #FAEEDA; color: #854F0B; }
+    .risk-low { background: #E1F5EE; color: #0F6E56; }
+    @media (max-width: 768px) {
+      .segment-grid { grid-template-columns: 1fr; }
+      .key-numbers { grid-template-columns: repeat(2, 1fr); }
+    }
   </style>
 </head>
 <body>
 <div class="app">
   <div class="tabs">
+    <button class="tab" onclick="switchTab('plan')">Business Plán</button>
     <button class="tab active" onclick="switchTab('cashflow')">Cashflow model</button>
     <button class="tab" onclick="switchTab('pricing')">Cenotvorba</button>
     <button class="tab" onclick="switchTab('structure')">Právní struktura</button>
     <button class="tab" onclick="switchTab('questions')">Otevřené dotazy</button>
+  </div>
+
+  <!-- BUSINESS PLAN TAB -->
+  <div class="section" id="tab-plan">
+    <div style="margin-bottom: 1.5rem;">
+      <div class="doc-h1">PRIVATE GYM OSTRAVA</div>
+      <div class="doc-sub">Luxury fitness v centru Ostravy &mdash; Business Plán &middot; Obchodní strategie &middot; Právní struktura &middot; Cashflow model &middot; Cenotvorba<br>Verze 1.0 &mdash; Interní návrh &nbsp;|&nbsp; Rok 2025 &nbsp;|&nbsp; Lokalita Centrum Ostravy &nbsp;|&nbsp; Zpracoval WebByKliment</div>
+    </div>
+
+    <!-- 1. Executive Summary -->
+    <div class="card">
+      <div class="doc-h2">1. Executive Summary</div>
+      <div class="doc-p">Projekt Private Gym Ostrava je záměr proměnit prostor 80&ndash;100 m&sup2; v centru Ostravy (původně barber shop) na <strong>privátní luxury fitness centrum</strong> s omezeným počtem členů, 24/7 přístupem a blokovým pronájmem prostoru externím trenérům.</div>
+      <div class="doc-p">Jde o <strong>členský klub, ne o klasické fitko</strong>. Omezený počet členů (hard cap 50), žádné fronty, soukromé prostředí, prémiové vybavení &mdash; to jsou hodnoty, za které je cílový zákazník ochoten platit 2 500&ndash;6 500 Kč měsíčně.</div>
+
+      <div class="key-numbers">
+        <div class="key-num"><div class="key-num-val">80&ndash;100 m&sup2;</div><div class="key-num-label">Plocha prostoru</div></div>
+        <div class="key-num"><div class="key-num-val">1,5M Kč</div><div class="key-num-label">CAPEX budget</div></div>
+        <div class="key-num"><div class="key-num-val">30&ndash;35</div><div class="key-num-label">Break-even členů</div></div>
+        <div class="key-num"><div class="key-num-val">24&ndash;36 měs</div><div class="key-num-label">Návratnost</div></div>
+      </div>
+
+      <div class="warn-box">Čísla v tomto dokumentu jsou modelová. Před podpisem nájemní smlouvy a zahájením rekonstrukce je nutné ověřit klíčové provozní předpoklady (viz kapitola 7 &mdash; Otevřené dotazy).</div>
+    </div>
+
+    <!-- 2. Obchodní strategie -->
+    <div class="card">
+      <div class="doc-h2">2. Obchodní strategie</div>
+
+      <div class="doc-h3">2.1 Positioning &mdash; co tento projekt je a co není</div>
+      <div class="doc-p">Private Gym Ostrava <strong>není fitko</strong>. Je to členský sportovní klub s omezeným přístupem. Rozdíl není kosmetický &mdash; je to fundamentální rozhodnutí, které ovlivňuje ceny, komunikaci, akvizici i retenci zákazníků.</div>
+
+      <table class="tbl">
+        <tr><th>Kritérium</th><th>Klasické fitko</th><th>Private Gym (náš přístup)</th></tr>
+        <tr><td>Počet členů</td><td>Neomezený</td><td class="pos">Hard cap &mdash; max 50</td></tr>
+        <tr><td>Kapacita ve špičce</td><td>Fronty</td><td class="pos">Vždy prostor pro sebe</td></tr>
+        <tr><td>Zákazník</td><td>Anonymní</td><td class="pos">Osobní onboarding</td></tr>
+        <tr><td>Prodejní strategie</td><td>Přes slevy</td><td class="pos">Přes exkluzivitu (waitlist)</td></tr>
+        <tr><td>Hlavní argument</td><td>Cena</td><td class="pos">Prostředí</td></tr>
+        <tr><td>Odchod člena</td><td>Snadný</td><td class="pos">Ztráta místa ve frontě</td></tr>
+      </table>
+
+      <div class="doc-h3">2.2 Cílový zákazník &mdash; tři segmenty</div>
+      <div class="segment-grid">
+        <div class="segment-card" style="border-top: 3px solid #0F6E56;">
+          <div class="segment-card-title">Segment A &mdash; Manažer / podnikatel</div>
+          <p><strong>Primární segment.</strong> Trénuje ráno (6&ndash;8h) nebo v poledne &mdash; mimo špičky.</p>
+          <p>Ocení soukromí, čistotu a spolehlivost. Nechce čekat na stroj.</p>
+          <p>Platí z firemního účtu nebo OSVČ výdaj &mdash; cena není hlavní bariéra.</p>
+          <p><strong>Akvizice:</strong> LinkedIn Ostrava, firemní partnerství, networking.</p>
+        </div>
+        <div class="segment-card" style="border-top: 3px solid #378ADD;">
+          <div class="segment-card-title">Segment B &mdash; Osobní trenér (B2B)</div>
+          <p><strong>Blokový pronájem.</strong> Má klienty, ale nemá kde trénovat. Platí 700&ndash;950 Kč/hod.</p>
+          <p>Přivádí vlastní klienty, část z nich přejde na přímé členství.</p>
+          <p>Stabilizuje cashflow v prvním roce &mdash; B2B kotva.</p>
+          <p><strong>Akvizice:</strong> Přímé oslovení 8&ndash;10 trenérů před otevřením.</p>
+        </div>
+        <div class="segment-card" style="border-top: 3px solid #EF9F27;">
+          <div class="segment-card-title">Segment C &mdash; Fitness nadšenec</div>
+          <p><strong>Sekundární segment.</strong> Trénuje 4&ndash;6x týdně, zná svoje cviky.</p>
+          <p>Nesnáší přeplněná fitka. Ocení 24/7 přístup a klidné prostředí.</p>
+          <p><strong>Akvizice:</strong> Instagram, lokální komunity (padel, běh, CrossFit), word of mouth.</p>
+        </div>
+      </div>
+
+      <div class="doc-h3">2.3 Go-to-market &mdash; jak získat prvních 30 členů</div>
+      <div class="doc-p">Prvních 30 členů je nejtěžší. Marketing nestačí &mdash; potřebná je přímá akvizice.</div>
+      <table class="tbl">
+        <tr><th>Fáze</th><th>Akce</th><th>Cíl</th></tr>
+        <tr><td>Pre-launch (2 měs. před)</td><td>Oslovit 8 PT trenérů, nabídnout blokový pronájem</td><td class="pos">5+ PT smluv před otevřením</td></tr>
+        <tr><td>Pre-launch</td><td>Oslovit osobně 20&ndash;30 manažerů/podnikatelů v centru</td><td class="pos">10&ndash;15 zakládajících členů</td></tr>
+        <tr><td>Launch</td><td>Otevření pouze pro founding members + jejich hosté</td><td>Word of mouth, waitlist efekt</td></tr>
+        <tr><td>Měsíc 1&ndash;3</td><td>Instagram + LinkedIn obsah (zákulisí, prostředí, výsledky)</td><td>Organická akvizice 3&ndash;5 členů/měs</td></tr>
+        <tr><td>Měsíc 3+</td><td>Firemní benefit balíčky (HR manažeři)</td><td>B2B skupinová členství</td></tr>
+      </table>
+      <div class="info-box" style="margin-top: 1rem;"><strong>Doporučení:</strong> Před podpisem nájemní smlouvy provést pre-launch validaci &mdash; oslovit osobně 20 konkrétních lidí a získat alespoň 5&ndash;8 příslibu členství. Pokud to nejde, je nutné přehodnotit positioning nebo ceny.</div>
+    </div>
+
+    <!-- 3. Cenotvorba -->
+    <div class="card">
+      <div class="doc-h2">3. Cenotvorba</div>
+      <div class="doc-p">Při 35 členech a tier mixu 60/30/10 vychází <strong>průměrné členství na cca 3 400 Kč/měsíc</strong> &mdash; to je základ pro cashflow model. Podrobný rozpis cen viz tab <em>Cenotvorba</em>.</div>
+      <div class="doc-p"><strong>Závěr:</strong> Standard tier za 2 500 Kč je v rámci Ostravy opodstatněný a srovnatelný s pražskými privátními studii. Riziko: cena musí být podpořena kvalitou prostředí a exkluzivitou &mdash; jinak se zákazník porovná s lokálními fitky a odejde.</div>
+    </div>
+
+    <!-- 4. Finanční model -->
+    <div class="card">
+      <div class="doc-h2">4. Finanční model &mdash; CAPEX &amp; OPEX</div>
+
+      <div class="doc-h3">4.1 CAPEX &mdash; investice</div>
+      <table class="tbl">
+        <tr><th>Položka</th><th style="text-align:right">Odhad (Kč)</th><th>Poznámka</th></tr>
+        <tr><td>Stavební úpravy (podlahy, elektro, vzduchotechnika)</td><td style="text-align:right">500 000&ndash;900 000</td><td>Závisí na stavu prostoru</td></tr>
+        <tr><td>Sprchy + šatny (hygienický standard)</td><td style="text-align:right">200 000&ndash;300 000</td><td>Min. požadavky vyhl. 238/2011</td></tr>
+        <tr><td>Vybavení &mdash; stroje, závaží, cardio (premium)</td><td style="text-align:right">400 000&ndash;700 000</td><td>Life Fitness, Technogym</td></tr>
+        <tr><td>Smart-entry systém (24/7 přístup)</td><td style="text-align:right">80 000&ndash;150 000</td><td>Salto / Kisi</td></tr>
+        <tr><td>Design + interiér + branding</td><td style="text-align:right">100 000&ndash;250 000</td><td>Klíčový diferenciátor</td></tr>
+        <tr><td>Provozní rezerva (12 měsíců ztrát)</td><td style="text-align:right">200 000&ndash;336 000</td><td>Viz ramp-up analýza</td></tr>
+        <tr class="sum-row"><td><strong>CELKEM budget</strong></td><td style="text-align:right"><strong>1 500 000 Kč</strong></td><td>Schválený limit</td></tr>
+      </table>
+      <div class="doc-p" style="margin-top: 8px;">Dobrovolná registrace k DPH od startu umožní odpočet z investice. Odhadovaná úspora: <strong>200 000&ndash;265 000 Kč</strong>.</div>
+
+      <div class="doc-h3">4.2 Měsíční náklady (OPEX)</div>
+      <table class="tbl">
+        <tr><th>Položka</th><th style="text-align:right">Kč/měs</th><th>Typ</th></tr>
+        <tr><td>Nájem prostoru</td><td style="text-align:right">28 000</td><td>Fixní</td></tr>
+        <tr><td>Energie + voda</td><td style="text-align:right">8 000</td><td>Fixní</td></tr>
+        <tr><td>Internet + alarm + smart systém</td><td style="text-align:right">4 000</td><td>Fixní</td></tr>
+        <tr><td>Účetnictví + administrativa</td><td style="text-align:right">3 000</td><td>Fixní</td></tr>
+        <tr><td>Pojištění (odpovědnost + majetek)</td><td style="text-align:right">2 000</td><td>Fixní</td></tr>
+        <tr><td>Marketing (první rok min.)</td><td style="text-align:right">15 000&ndash;25 000</td><td>Fixní &mdash; klíčové navýšit</td></tr>
+        <tr><td>Variabilní náklady</td><td style="text-align:right">~5 % z obratu</td><td>Variabilní</td></tr>
+        <tr class="sum-row"><td><strong>FIXNÍ OPEX CELKEM</strong></td><td style="text-align:right"><strong>~60 000&ndash;70 000</strong></td><td>Bez marketingu 50 000</td></tr>
+      </table>
+      <div class="warn-box" style="margin-top: 10px;">Model nezahrnuje odměnu jednatele. Pokud klient potřebuje z byznysu žít, je nutné připočítat 20 000&ndash;50 000 Kč/měsíc &mdash; to posune break-even na 40&ndash;45 členů.</div>
+
+      <div class="doc-h3">4.3 Break-even analýza</div>
+      <div class="doc-p">Reálný break-even bez odměny jednatele: <strong>22&ndash;28 členů</strong>. Výpočet předpokládá průměrné členství 3 400 Kč/měs + blokový pronájem 15 000&ndash;20 000 Kč/měs od M3 dále.</div>
+
+      <div class="doc-h3">4.4 Ramp-up &mdash; cashflow prvních 24 měsíců</div>
+      <div class="doc-p">Prvních 12 měsíců jsou pravděpodobně ztrátové nebo jen mírně kladné.</div>
+      <table class="tbl">
+        <tr><th>Období</th><th>Obsazenost</th><th>Měsíční EBITDA</th><th>Kumulativní CF</th></tr>
+        <tr><td>M1&ndash;M3 (rozjezd)</td><td>10&ndash;20 %</td><td class="neg">&minus;40 000 až &minus;20 000 Kč</td><td class="neg">Kumulativní ztráta</td></tr>
+        <tr><td>M4&ndash;M6 (růst)</td><td>30&ndash;50 %</td><td>&minus;10 000 až +20 000 Kč</td><td class="neg">Ztráta stále roste</td></tr>
+        <tr><td>M7&ndash;M12 (stabilizace)</td><td>60&ndash;75 %</td><td class="pos">+25 000 až +45 000 Kč</td><td>Začátek splácení</td></tr>
+        <tr><td>M13&ndash;M24 (provoz)</td><td>80&ndash;95 %</td><td class="pos">+50 000 až +80 000 Kč</td><td class="pos">Návratnost CAPEX</td></tr>
+      </table>
+      <div class="info-box" style="margin-top: 10px;"><strong>Doporučení:</strong> Mít připravenu finanční rezervu min. 250 000&ndash;350 000 Kč na pokrytí prvních 12 měsíců provozu. Tuto částku zahrnout do CAPEX plánu.</div>
+    </div>
+
+    <!-- 5. Právní a daňová struktura -->
+    <div class="card">
+      <div class="doc-h2">5. Právní a daňová struktura</div>
+      <div class="doc-p">Pro tento projekt jednoznačně doporučujeme <strong>s.r.o. jako provozní entitu</strong>. Detailní rozpis viz tab <em>Právní struktura</em>.</div>
+      <div class="doc-p"><strong>DPH:</strong> Dobrovolná registrace k DPH od samého začátku, před zahájením rekonstrukce. Důvod: odpočet DPH z celé investice (200 000&ndash;265 000 Kč úspora).</div>
+      <div class="doc-p"><strong>Živnostenský list:</strong> Provozování tělovýchovných a sportovních zařízení = VOLNÁ živnost. Pokud klient sám osobně trénuje klienty, nutná VÁZANÁ živnost nebo zaměstnání kvalifikovaného trenéra.</div>
+    </div>
+
+    <!-- 6. Provozní model -->
+    <div class="card">
+      <div class="doc-h2">6. Provozní model</div>
+
+      <div class="doc-h3">6.1 Denní provoz bez zaměstnanců</div>
+      <div class="doc-p">Jednatel (majitel) provozuje fitko sám bez zaměstnanců. Realistické díky smart-entry systému, který umožňuje 24/7 přístup bez fyzické obsluhy.</div>
+      <table class="tbl">
+        <tr><th>Systém / proces</th><th>Řešení</th><th>Náklad</th></tr>
+        <tr><td>Vstup do prostoru</td><td>Smart lock (Salto / Kisi) + mobilní app</td><td>V CAPEX (80&ndash;150K)</td></tr>
+        <tr><td>Nové přihlášky a platby</td><td>Online formulář + SEPA inkaso</td><td>SaaS 500&ndash;1 500 Kč/měs</td></tr>
+        <tr><td>Komunikace s členy</td><td>WhatsApp group / email / Instagram</td><td>0 Kč</td></tr>
+        <tr><td>Monitoring 24/7</td><td>IP kamerový systém + log vstupů</td><td>V CAPEX</td></tr>
+        <tr><td>Rezervace bloků</td><td>Calendly nebo podobný nástroj</td><td>0&ndash;300 Kč/měs</td></tr>
+        <tr><td>Účetnictví</td><td>Externě</td><td>~3 000 Kč/měs (fixní OPEX)</td></tr>
+      </table>
+
+      <div class="doc-h3">6.2 Onboarding nového člena</div>
+      <div class="doc-p">Každý člen projde osobním onboardingem &mdash; to je záměrné a strategické. Vytváří vztah, snižuje churn a odlišuje klub od anonymního fitka.</div>
+      <div class="step-grid">
+        <div class="step-num">1</div><div class="step-content"><strong>Poptávka</strong><span>Formulář na webu nebo přímý kontakt &mdash; rychlá odpověď do 24h</span></div>
+        <div class="step-num">2</div><div class="step-content"><strong>Prohlídka</strong><span>Osobní schůzka v prostoru &mdash; 20 minut</span></div>
+        <div class="step-num">3</div><div class="step-content"><strong>Onboarding</strong><span>Podpis smlouvy, nastavení přístupu, ukázka prostoru</span></div>
+        <div class="step-num">4</div><div class="step-content"><strong>Uvítání</strong><span>Přidání do členské skupiny, úvodní zpráva, welcome kit</span></div>
+        <div class="step-num">5</div><div class="step-content"><strong>Check-in</strong><span>Po 30 dnech &mdash; zpětná vazba, ověření spokojenosti</span></div>
+      </div>
+    </div>
+
+    <!-- 8. Rizika a mitigace -->
+    <div class="card">
+      <div class="doc-h2">7. Rizika a mitigace</div>
+      <div class="risk-row">
+        <div style="flex: 1;"><strong style="color: var(--color-text-primary);">Pomalý ramp-up (&lt; 20 členů v M6)</strong><br><span style="color: var(--color-text-secondary);">Mitigace: Pre-launch validace, PT trenéři jako kotva</span></div>
+        <span class="risk-badge risk-med">Střední</span>
+        <span class="risk-badge risk-high">Vysoký dopad</span>
+      </div>
+      <div class="risk-row">
+        <div style="flex: 1;"><strong style="color: var(--color-text-primary);">Příliš nízká cena &mdash; nevnímáno jako luxury</strong><br><span style="color: var(--color-text-secondary);">Mitigace: Positioning jako klub, ne fitko &mdash; onboarding, waitlist efekt</span></div>
+        <span class="risk-badge risk-low">Nízká&ndash;střední</span>
+        <span class="risk-badge risk-med">Střední dopad</span>
+      </div>
+      <div class="risk-row">
+        <div style="flex: 1;"><strong style="color: var(--color-text-primary);">Nájem zdraží po 2 letech</strong><br><span style="color: var(--color-text-secondary);">Mitigace: Zajistit fixaci nájmu na 3&ndash;5 let v nájemní smlouvě</span></div>
+        <span class="risk-badge risk-med">Střední</span>
+        <span class="risk-badge risk-med">Střední dopad</span>
+      </div>
+      <div class="risk-row">
+        <div style="flex: 1;"><strong style="color: var(--color-text-primary);">Technická závada smart-entry (24/7 access)</strong><br><span style="color: var(--color-text-secondary);">Mitigace: Záložní systém + 24h podpora dodavatele</span></div>
+        <span class="risk-badge risk-low">Nízká</span>
+        <span class="risk-badge risk-high">Vysoký dopad</span>
+      </div>
+      <div class="risk-row">
+        <div style="flex: 1;"><strong style="color: var(--color-text-primary);">Kolaudační problém pro 24/7</strong><br><span style="color: var(--color-text-secondary);">Mitigace: Ověřit PŘED podpisem smlouvy &mdash; ne po</span></div>
+        <span class="risk-badge risk-med">Střední</span>
+        <span class="risk-badge risk-med">Střední dopad</span>
+      </div>
+      <div class="risk-row" style="border-bottom: none;">
+        <div style="flex: 1;"><strong style="color: var(--color-text-primary);">Klient potřebuje příjem z byznysu od M1</strong><br><span style="color: var(--color-text-secondary);">Mitigace: Zahrnout odměnu jednatele do modelu, upravit break-even</span></div>
+        <span class="risk-badge risk-med">Závisí</span>
+        <span class="risk-badge risk-high">Vysoký dopad</span>
+      </div>
+    </div>
+
+    <!-- 9. Závěr a doporučené kroky -->
+    <div class="card">
+      <div class="doc-h2">8. Závěr a doporučené kroky</div>
+      <div class="doc-p">Projekt Private Gym Ostrava je <strong>životaschopný byznys</strong> s realistickým break-evenem a zajímavou návratností investice. Klíč k úspěchu není v prostoru ani ve vybavení &mdash; je v tom, jak je klub postaven, jaký zákazník do něj vstoupí jako první a jak bude komunikován.</div>
+
+      <div class="step-grid" style="margin-bottom: 1.25rem;">
+        <div class="step-num">1</div><div class="step-content"><strong>Pre-launch validace (2 týdny)</strong><span>Oslovit osobně 20 konkrétních lidí. Získat min. 5&ndash;8 příslibu členství. Teprve pak jednat dál.</span></div>
+        <div class="step-num">2</div><div class="step-content"><strong>Ověřit otevřené dotazy (kap. 7)</strong><span>Stavební úřad (24/7), KHS (hygiena), pojišťovna, nájemní smlouva (min. 5 let, fitness provoz).</span></div>
+        <div class="step-num">3</div><div class="step-content"><strong>Vznik s.r.o. a DPH registrace</strong><span>Notář &rarr; živnostenský úřad &rarr; OR &rarr; FÚ. Podpis nájemní smlouvy na s.r.o.</span></div>
+        <div class="step-num">4</div><div class="step-content"><strong>Oslovit PT trenéry (paralelně)</strong><span>Před otevřením mít podepsaných 5+ smluv na blokový pronájem &mdash; pokryjete fixní náklady od M1.</span></div>
+        <div class="step-num">5</div><div class="step-content"><strong>Rekonstrukce a vybavení</strong><span>Zahájit až po splnění kroků 1&ndash;4. Priorita: smart-entry, sprchy, podlahy. Design jako poslední.</span></div>
+        <div class="step-num">6</div><div class="step-content"><strong>Soft launch (jen founding members)</strong><span>Otevřít pro 10&ndash;15 zakládajících členů. Veřejné otevření až po ověření provozu.</span></div>
+      </div>
+
+      <div class="key-numbers">
+        <div class="key-num"><div class="key-num-val">22&ndash;28</div><div class="key-num-label">Break-even členů<br>(38&ndash;45 s odměnou jednatele)</div></div>
+        <div class="key-num"><div class="key-num-val">1,5M</div><div class="key-num-label">CAPEX budget<br>(+ rezerva 250&ndash;350K)</div></div>
+        <div class="key-num"><div class="key-num-val">24&ndash;30</div><div class="key-num-label">Měsíců návratnost<br>(při 35 členech)</div></div>
+        <div class="key-num"><div class="key-num-val">265K</div><div class="key-num-label">DPH úspora<br>(z dobrovolné registrace)</div></div>
+      </div>
+
+      <div class="info-box"><strong>Nejdůležitější rozhodnutí:</strong> udělat pre-launch validaci před podpisem smlouvy.</div>
+    </div>
   </div>
 
   <!-- CASHFLOW TAB -->
@@ -527,7 +784,7 @@ function buildQuestions() {
 }
 
 function switchTab(name) {
-  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', ['cashflow','pricing','structure','questions'][i] === name));
+  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', ['plan','cashflow','pricing','structure','questions'][i] === name));
   document.querySelectorAll('.section').forEach(s => s.classList.toggle('active', s.id === 'tab-'+name));
   if (name === 'pricing') setTimeout(buildMixChart, 50);
 }
